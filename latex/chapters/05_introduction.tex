@@ -1,0 +1,14 @@
+\chapter*{Úvod}
+\addcontentsline{toc}{chapter}{Úvod}
+
+V dnešní době se můžeme setkat s \index{GIS} geoinformačními ( GIS ) technologiemi na každém kroku. V různých oblastech krajinného inženýrství, při plánování výstavby silnic, v územním plánování, při řešení krizových situacích či plánování záchranných akcí. Uživatel si může vybrat z nepřeberného množství již existujících GIS nástrojů, řešení. A je pěkné, že svobodná řešení, nejen v oblasti geoinformačních technologií, drží krok s těmi proprietárními. Uživatel tedy nemusí sahat hluboko do kapsy. Co se týče nástrojů pro prohlížení, zpracování a analýzu \index{geodata} geodat, můžeme jmenovat například GRASS GIS, gvSIG, Quantum GIS či SAGA GIS. Tato práce si ale nekladla za cíl srovnat GIS nástroje, ale implementací nástroje do programu Quantum GIS, který by uživateli umožňoval vytvářet vlastní funkce spojováním již existujících funkcí.
+
+Můžeme se také setkat s pojmy jako \begin{scriptsize}model builder\end{scriptsize} či \begin{scriptsize}chaining\end{scriptsize}, v té práci budu používat pojem workflow builder. Takzvané workflow buildery dávají uživateli možnost vytvářet si vlastní moduly za pomocí spojování výstupů a vstupů modulů již existujících. Uživatel tak nemusí spouštět každý modul zvlášť a starat se o výstupy, nová data, která se vytvoří jen dočasně a která uživatel v konečném výsledku nepotřebuje. Dále je pro uživatele je mnohem pohodlnější, pakliže může najít všechny funkce na jednom místě (tzv. toolbox), nežli při hledání procházet všechny možné pluginy.
+
+V době psaní této diplomové práce existoval projekt \index{QGIS Processing Framework} QGIS Processing Framework studenta Camilo Polymeris z univerzity Universidad de Concepción. QGIS Processing Framework si kladl za cíl být frameworkem, který by sdružoval moduly z pluginů pro QGIS na jednom místě (tzv. toolbox). Odtud by byly jednotlivé moduly volány, pomocí workflow builderu spojovány, ukládány atp. V rámci tohoto projektu začala vznikat podpora pro použití modulů z jiného GIS nástroje - \index{SAGA GIS}System for Automated Geoscientific Analysis ( SAGA GIS ). V době psaní existovala podpora pro 170 modulů, ne všechny ale byly testovány a fungovaly správně. Ale i přesto se mohlo začít s práci na workflow builderu.
+
+Aktuální verzi workflow builderu můžete najít zde:
+
+\begin{center}
+	\href{https://github.com/CzendaZdenda/qgis}{\texttt{https://github.com/CzendaZdenda/qgis}}
+\end{center}

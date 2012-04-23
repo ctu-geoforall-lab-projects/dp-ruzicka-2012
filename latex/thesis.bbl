@@ -1,0 +1,47 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 0.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{qgis:www}{online}{}
+  \field{sortinit}{O}
+  \field{title}{Official homepage of Quantum GIS}
+  \verb{url}
+  \verb http://www.qgis.org
+  \endverb
+\endentry
+
+\entry{pyqgis:www}{online}{}
+  \field{sortinit}{P}
+  \field{title}{PyQGIS Developer Cookbook}
+  \verb{url}
+  \verb http://www.qgis.org/pyqgis-cookbook/index.html
+  \endverb
+  \field{year}{2012}
+\endentry
+
+\entry{qgis_api:www}{online}{}
+  \field{sortinit}{Q}
+  \field{title}{Quantum GIS API Documentation}
+  \verb{url}
+  \verb http://qgis.org/api/
+  \endverb
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

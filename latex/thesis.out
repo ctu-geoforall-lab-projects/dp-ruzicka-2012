@@ -1,0 +1,25 @@
+\BOOKMARK [0][-]{chapter*.6}{\332vod}{}
+\BOOKMARK [0][-]{chapter.1}{Teorie}{}
+\BOOKMARK [1][-]{section.1.1}{Quantum GIS}{chapter.1}
+\BOOKMARK [2][-]{subsection.1.1.1}{Spr\341va pluginu}{section.1.1}
+\BOOKMARK [2][-]{subsection.1.1.2}{Psan\355 vlastn\355ho pluginu}{section.1.1}
+\BOOKMARK [2][-]{subsection.1.1.3}{Python plugin}{section.1.1}
+\BOOKMARK [2][-]{subsection.1.1.4}{C++ plugin}{section.1.1}
+\BOOKMARK [1][-]{section.1.2}{QGIS Processing Framework}{chapter.1}
+\BOOKMARK [2][-]{subsection.1.2.1}{Psan\355 pluginu}{section.1.2}
+\BOOKMARK [1][-]{section.1.3}{Python}{chapter.1}
+\BOOKMARK [1][-]{section.1.4}{Qt}{chapter.1}
+\BOOKMARK [2][-]{subsection.1.4.1}{Model/View Programming}{section.1.4}
+\BOOKMARK [2][-]{subsection.1.4.2}{Graphics View Interface}{section.1.4}
+\BOOKMARK [2][-]{subsection.1.4.3}{VisTrails, Orange}{section.1.4}
+\BOOKMARK [1][-]{section.1.5}{.xml.dom}{chapter.1}
+\BOOKMARK [0][-]{chapter.2}{Workflow Builder}{}
+\BOOKMARK [1][-]{section.2.1}{Tvorba workflow}{chapter.2}
+\BOOKMARK [1][-]{section.2.2}{Ulo\236en\355 workflow}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.2.1}{Pops\341n\355 v\375stupn\355ho xml souboru}{section.2.2}
+\BOOKMARK [1][-]{section.2.3}{Nacten\355 workflow do PF Manageru}{chapter.2}
+\BOOKMARK [0][-]{chapter.3}{SEXTANTE}{}
+\BOOKMARK [1][-]{section.3.1}{Srovn\341n\355 QGIS Processing Framework v SEXTANTE}{chapter.3}
+\BOOKMARK [1][-]{section.3.2}{Srovn\341n\355 Workflow Builder v SEXTANTE Modeler}{chapter.3}
+\BOOKMARK [0][-]{chapter*.8}{Rejstr\355k}{}
+\BOOKMARK [0][-]{chapter*.9}{Literatura}{}
