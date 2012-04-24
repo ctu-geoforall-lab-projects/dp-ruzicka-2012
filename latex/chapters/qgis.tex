@@ -33,7 +33,7 @@ Jak už bylo zmíněno Quantum GIS umožňuje uživatelům rozšiřovat funkce p
 	\item \textit{C:$\setminus$Documents and Settings$\setminus$USER$\setminus$.qgis$\setminus$python$\setminus$plugins} - v případě OS Windows bývá cesta podobná této
 \end{itemize}
 
-\noindent Pakliže uživatel napíše plugin v jazyce Python, doporučuji ho uložit do tohoto adresáře. Je také sice možnost uložit plugin do adresáře \textit{\$QGIS\_INSTALL\_DIR $\setminus$share$\setminus$qgis$\setminus$python$\setminus$plugins}, ale při případné opětovné kompilaci by byly změny ztraceny.
+Pakliže uživatel napíše plugin v jazyce Python, doporučuji ho uložit do tohoto adresáře. Je také sice možnost uložit plugin do adresáře \textit{\$QGIS\_INSTALL\_DIR $\setminus$share$\setminus$qgis$\setminus$python$\setminus$plugins}, ale při případné opětovné kompilaci by byly změny ztraceny.
 
 \noindent Pluginy psané v C++ se po přeložení ukládají standardně v \textit{\$QGIS\_INSTALL\_DIR $\setminus$lib$\setminus$qgis$\setminus$plugins} případně uživatel může přidat nová úložiště pomocí \textit{Settings $\rightarrow$ Options} a v záložce \textit{Generals} zadat cestu [Obr. \ref{cpprepository}].
 
@@ -44,7 +44,7 @@ Jak už bylo zmíněno Quantum GIS umožňuje uživatelům rozšiřovat funkce p
   	\label{cpprepository}
 \end{figure}
 
-\noindent Všechny nainstalované pluginy, ať psané v jazyce C++ či Python, potom může uživatel spravovat přes \textbf{QGIS Plugin Manager} - \textit{Plugins$\rightarrow$Manage Plugins...} [Obrázek \ref{plugin_manager}.
+Všechny nainstalované pluginy, ať psané v jazyce C++ či Python, může uživatel spravovat přes \textbf{QGIS Plugin Manager} - \textit{Plugins$\rightarrow$Manage Plugins...} [Obrázek \ref{plugin_manager}.
 
 \begin{figure}
 	\centering
@@ -59,9 +59,7 @@ Pluginy mohou být psány na jazyce C++ a Python. Již z charakteristiky daných
 \subsection{Python plugin}
 \nocite{pyqgis:www}
 \index{PyQGIS}
-Při psaní pluginu v jazyce Python využíváme nástroje PyQGIS. Kromě dokumentace k Quantum GIS API také doporučuji \cite{pyqgis:www}. 
-
-%Tvorba zásuvných modulů se - pomoci Plugin Builderu[obr] ci od piky, pripadne si stahnou jiz nejaky hotovy plugin a učit se z něj. Struktura adresare s pluginem. Nutne soubory a co v nich. 
+Při psaní pluginu v jazyce Python využíváme nástroje PyQGIS. Kromě dokumentace k Quantum GIS API také doporučuji \cite{pyqgis:www}. Dále můžeme využít nástroj Plugin Builder, což je v podstatě také plugin, který vygeneruje základní soubory, kód, který potom začneme upravovat podle tak, aby náš plugin dělal to, co chceme. \\
 
 \lstinputlisting[caption={\_\_init\_\_.py - inicializační soubor},label=plugin:init]{code/plugins/python/__init__.py}
 

@@ -4,4 +4,20 @@
 \section{Tvorba workflow}
 \section{Uložení workflow}
 \subsection{Popsání výstupního xml souboru}
+XML nabízí jednoduché uložení hierarchicky strukturovaný dat. O prvcích XML dokumentu hovoříme jako elementech. Elementy jsou ohraničeny počátečními a koncovými značkami, tzv. tagy. XML dokument obsahuje vždy právě jeden kořenový element. Ten se může skládat z dalších a dalších elementů. V našem případě je kořenový element Graph. Ten se skládá z minimálně jednoho podgrafu (SubGraph), a ten poté minimálně z jednoho modulu (Module). Podgraf dále může obsahovat spojení mezi moduly (Connection). Modul kromě toho obsahuje elementy parametr (Port) a tag (tag) a popis. Graf také obsahuje tagy a popis. 
+
+\begin{table}	
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		atribut & příklad \\
+		\hline
+		name & Addition two rasters \\
+		tags & ['raster', 'hydrology'] \\	
+		\hline	
+	\end{tabular}
+	\caption{atributy elementu Graph}
+	\label{tab:graph}
+\end{table}
+
 \section{Načtení workflow do PF Manageru}

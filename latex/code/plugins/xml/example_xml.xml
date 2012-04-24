@@ -1,0 +1,12 @@
+<Graph name="Addition two rasters">
+	Description...
+	<SubGraph id="17">
+        <Module id="769" name="Input raster by path">
+			You can register raster layer to QGIS by giving the path.
+			<tag> workflow builder </tag>
+        </Module>
+		<Module id="998" name="Operations with two rasters">
+			Pixel by pixel operations with two rasters.
+        </Module>
+    </SubGraph>
+</Graph>

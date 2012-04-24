@@ -1,2 +1,17 @@
 \newpage
-\section{.xml.dom}
+\section{.xml.dom.monidom}
+\nocite{python:www}
+\nocite{py3:book}
+
+Nově vzniklé workflow se ukládají ve formátu \index{XML} XML. Výhoda tohoto formátu je, ze se s ním snadno pracuje a jde v podstatě pouze o textový dokument.
+
+Python nabízí několik možností pro zpracování XML dokumentů.
+
+XML nabízí jednoduché uložení hierarchicky strukturovaný dat. O prvcích XML dokumentu hovoříme jako elementech. Elementy jsou ohraničeny počátečními a koncovými znaky, tzv. tagy. XML dokument obsahuje vždy právě jeden kořenový element. Ten se může skládat z dalších a dalších elementů. Elementy mohou obsahovat atributy (dvojice jméno="hodnota").  Atributy se nesmějí v opakovat. Elementy kromě toho mohou obsahovat text. Text se uvádí mezi počáteční a koncový znak. \\
+
+\noindent Příklad XML dokumentu:\\
+
+\lstinputlisting[language=XML,caption={Příklad XML dokumentu},morekeywords={Graph, SubGraph, Module, tag}, label=xml:example]{code/plugins/xml/example_xml.xml}
+
+
+

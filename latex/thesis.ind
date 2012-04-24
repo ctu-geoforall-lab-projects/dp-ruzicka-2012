@@ -18,6 +18,7 @@
   \indexspace
 
   \item PyQGIS, \hyperpage{7}
+  \item Python, \hyperpage{9}
 
   \indexspace
 
@@ -26,7 +27,15 @@
 
   \indexspace
 
-  \item SAGA GIS, \hyperpage{1}
-  \item SEXTANT, \hyperpage{10}
+  \item SAGA GIS, \hyperpage{2}
+  \item SEXTANT, \hyperpage{16}
+
+  \indexspace
+
+  \item VisTrails, \hyperpage{1}
+
+  \indexspace
+
+  \item XML, \hyperpage{12}
 
 \end{theindex}

@@ -1,7 +1,8 @@
 \indexentry {GIS|hyperpage}{1}
 \indexentry {geodata|hyperpage}{1}
+\indexentry {VisTrails|hyperpage}{1}
 \indexentry {QGIS Processing Framework|hyperpage}{1}
-\indexentry {SAGA GIS|hyperpage}{1}
+\indexentry {SAGA GIS|hyperpage}{2}
 \indexentry {QGIS,Quantum GIS|hyperpage}{3}
 \indexentry {OGR|hyperpage}{3}
 \indexentry {GDAL|hyperpage}{3}
@@ -10,4 +11,6 @@
 \indexentry {GDAL, GdalTools|hyperpage}{4}
 \indexentry {GRASS Plugin|hyperpage}{4}
 \indexentry {PyQGIS|hyperpage}{7}
-\indexentry {SEXTANT|hyperpage}{14}
+\indexentry {Python|hyperpage}{9}
+\indexentry {XML|hyperpage}{12}
+\indexentry {SEXTANT|hyperpage}{16}
