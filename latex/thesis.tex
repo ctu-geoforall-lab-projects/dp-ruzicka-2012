@@ -55,7 +55,8 @@
 % to je neco pro tvorbu odkazu a nacitani obrazku
 \usepackage[pdftex]{hyperref}
 \usepackage[pdftex]{graphicx}
-\renewcommand{\figurename}{Rajah}
+\renewcommand{\figurename}{Obr.}
+\addto\captionsczech{\renewcommand{\figurename}{Obr.}}
 
 % barevny text
 \usepackage{color}
@@ -71,6 +72,8 @@
 \renewcommand{\headrulewidth}{0.4pt} 
 \renewcommand{\footrulewidth}{0.0pt}    
 
+%%%% tabulka - vice radku v bunce
+\usepackage{multirow}
 
 % nastaveni radkovani na 1.5 radku
 \def\baselinestretch{1.5}\normalsize
@@ -138,6 +141,9 @@
 \printbibliography
 \addcontentsline{toc}{chapter}{Literatura}
 %-----<<< ---------- >>>-----
-
+%\newpage
+%\pagenumbering{arabic}
+%\chapter*{Příloha 1 - ukázka použití model/view architektury v PyQt4}
+%\lstinputlisting[caption={dorm.py - ukázka použití model/view architektury v PyQt4},label=pyqt:dorm]{code/pyqt/dorm.py}
 
 \end{document}

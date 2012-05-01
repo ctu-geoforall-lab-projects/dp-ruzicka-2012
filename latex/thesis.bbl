@@ -16,12 +16,40 @@
   {}
 \endgroup
 
+\entry{pf:supportedModules}{online}{}
+  \field{sortinit}{M}
+  \field{title}{Module Support for QGIS Processing Framework}
+  \verb{url}
+  \verb https://github.com/polymeris/qgis/wiki/Module-Support
+  \endverb
+\endentry
+
 \entry{qgis:www}{online}{}
   \field{sortinit}{O}
   \field{title}{Official homepage of Quantum GIS}
   \verb{url}
   \verb http://www.qgis.org
   \endverb
+\endentry
+
+\entry{py3:book}{book}{}
+  \name{author}{1}{%
+    {{Pilgrim}{P.}%
+     {Mark}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {CZ.NIC, z. s. p. o.}%
+  }
+  \strng{namehash}{PM1}
+  \strng{fullhash}{PM1}
+  \field{sortinit}{P}
+  \field{title}{Ponořme se do Python(u) 3. Dive Into Python 3.}
+  \verb{url}
+  \verb http://qgis.org/api/
+  \endverb
+  \field{year}{2010}
 \endentry
 
 \entry{pyqgis:www}{online}{}
@@ -33,11 +61,19 @@
   \field{year}{2012}
 \endentry
 
-\entry{qgis_api:www}{online}{}
-  \field{sortinit}{Q}
-  \field{title}{Quantum GIS API Documentation}
+\entry{pyqt:www}{online}{}
+  \field{sortinit}{P}
+  \field{title}{PyQt Class Reference}
   \verb{url}
-  \verb http://qgis.org/api/
+  \verb http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/classes.html
+  \endverb
+\endentry
+
+\entry{python:www}{online}{}
+  \field{sortinit}{P}
+  \field{title}{Python v2.7.3 documentation}
+  \verb{url}
+  \verb http://docs.python.org/
   \endverb
 \endentry
 

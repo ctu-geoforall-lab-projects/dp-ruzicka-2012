@@ -3,15 +3,50 @@
 \nocite{python:www}
 \nocite{py3:book}
 
-Nově vzniklé workflow se ukládají ve formátu \index{XML} XML. Výhoda tohoto formátu je, ze se s ním snadno pracuje a jde v podstatě pouze o textový dokument.
+Nově vzniklé workflow se ukládají ve formátu \index{XML} XML. Výhoda tohoto formátu je, že se s ním snadno pracuje a jde v podstatě pouze o textový dokument.
 
 Python nabízí několik možností pro zpracování XML dokumentů.
 
 XML nabízí jednoduché uložení hierarchicky strukturovaný dat. O prvcích XML dokumentu hovoříme jako elementech. Elementy jsou ohraničeny počátečními a koncovými znaky, tzv. tagy. XML dokument obsahuje vždy právě jeden kořenový element. Ten se může skládat z dalších a dalších elementů. Elementy mohou obsahovat atributy (dvojice jméno="hodnota").  Atributy se nesmějí v opakovat. Elementy kromě toho mohou obsahovat text. Text se uvádí mezi počáteční a koncový znak. \\
 
-\noindent Příklad XML dokumentu:\\
+\noindent Příklad XML dokumentu$:$ \\
 
 \lstinputlisting[language=XML,caption={Příklad XML dokumentu},morekeywords={Graph, SubGraph, Module, tag}, label=xml:example]{code/plugins/xml/example_xml.xml}
 
+Pro práci s XML dokumenty existuje v prostředí jazyka Python několik modulů. Mě se osvědčil modul xml.dom.minidom. Na začátku je potřeba si vytvořit objekt (\textit{Document}), který bude reprezentovat celý XML dokument. \textit{Document} je, stejně jako všechny ostatní elementy XML dokumentu, je podtřídou třídy \textit{Node}. Do takto vytvořeného objektu se poté mohou
+
+%Node - zakladni element, od kterého všechny elementy dědí
+%Document
+% - createElement(tagName="Graph") - vraci Element
+% - createTextNode("Description...")
+% - writexml(f,  indent="\n",  addindent="\t", encoding="UTF-8") - writexml(writer[, indent=""[, addindent=""[, newl=""]]]) - writer = soubor otevřený pro zapisování, indent="\n" - znamená, odsazení nového node-uzle-, addindent="\t" - znamená, jak se bude navyšovat odsazení pří zanořování ve stromě - v tomto případě se vždy přidá tabulátor, encoding = kódování
+%Element
+% - 	setAttribute(name="name", Addition two rasters)
+% - 	appendChild( ) napr. text node ci dalsi Element	
+%Attr
+%
+%Příklad:
+%otevřu soubor pro čtení
+%vytvořím Document()
+%pár prvků, jim atributy a text
+%uložím
+
+%\begin{table}	
+%	\centering
+%	\begin{tabular}{|c|c|}
+%		\hline
+%		atribut & příklad \\
+%		\hline
+%		name & Addition two rasters \\
+%		tags & ['raster', 'hydrology'] \\	
+%		\hline	
+%	\end{tabular}
+%	\caption{atributy elementu Graph}
+%	\label{tab:graph}
+%\end{table}
+
+načtení xml
+
+-------------
 
 
