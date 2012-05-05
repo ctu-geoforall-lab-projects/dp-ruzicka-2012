@@ -1,19 +1,81 @@
 \newpage
-\section{.xml.dom.monidom}
+
+\section{xml.dom.monidom}
 \nocite{python:www}
 \nocite{py3:book}
 
-Nově vzniklé workflow se ukládají ve formátu \index{XML} XML. Výhoda tohoto formátu je, že se s ním snadno pracuje a jde v podstatě pouze o textový dokument.
+Nově vzniklé workflow se ukládají do souboru využívajíce jazyk \index{XML} XML. Výhoda XML dokumentu je, že se s ním snadno pracuje a jde v podstatě pouze o textový dokument.
 
-Python nabízí několik možností pro zpracování XML dokumentů.
-
-XML nabízí jednoduché uložení hierarchicky strukturovaný dat. O prvcích XML dokumentu hovoříme jako elementech. Elementy jsou ohraničeny počátečními a koncovými znaky, tzv. tagy. XML dokument obsahuje vždy právě jeden kořenový element. Ten se může skládat z dalších a dalších elementů. Elementy mohou obsahovat atributy (dvojice jméno="hodnota").  Atributy se nesmějí v opakovat. Elementy kromě toho mohou obsahovat text. Text se uvádí mezi počáteční a koncový znak. \\
+XML nabízí jednoduché uložení hierarchicky strukturovaných dat. O prvcích XML dokumentu hovoříme jako elementech. Elementy jsou ohraničeny počátečními a koncovými znaky, tzv. tagy. XML dokument obsahuje vždy právě jeden kořenový element, který se může skládat z dalších a dalších elementů. V [\autoref{xml:example}] je kořenový element $Graph$. Elementy mohou obsahovat atributy (dvojice jméno="hodnota").  Jména atributů se v rámci jednoho elementu nesmějí opakovat. Elementy také mohou obsahovat text, který se uvádí mezi počátečním a koncovým znakem. \\
 
 \noindent Příklad XML dokumentu$:$ \\
 
 \lstinputlisting[language=XML,caption={Příklad XML dokumentu},morekeywords={Graph, SubGraph, Module, tag}, label=xml:example]{code/plugins/xml/example_xml.xml}
 
-Pro práci s XML dokumenty existuje v prostředí jazyka Python několik modulů. Mě se osvědčil modul xml.dom.minidom. Na začátku je potřeba si vytvořit objekt (\textit{Document}), který bude reprezentovat celý XML dokument. \textit{Document} je, stejně jako všechny ostatní elementy XML dokumentu, je podtřídou třídy \textit{Node}. Do takto vytvořeného objektu se poté mohou
+% DOM level 2
+Pro práci s XML dokumenty se v prostředí jazyka Python nabízí několik modulů. Při psaní této práce byl vybrán \index{xml.dom} \textbf{xml.dom}, resp. jeho odlehčená verze \index{xml.dom.minidom} \textbf{xml.dom.minidom}, který k XML dokumentu přistupujeme přes rozhraní DOM (Document Object Model). \index{DOM} \textbf{DOM}  je rozhraní pro přístup a práci s XML dokumenty. Je to zároveň standard organizace World Wide Web Consortium (W3C). W3C je organizace, která se zabývá standardy v prostředí Word Wide Web.
+
+Na začátku je potřeba si vytvořit objekt (\textit{Document}), který bude reprezentovat celý XML dokument. \textit{Document} je, stejně jako všechny ostatní elementy (objekty třídy Element) XML dokumentu, podtřídou třídy \textit{Node}. Do takto vytvořeného objektu se poté mohou přidávat další elementy. Třída \textbf{Document} obsahuje statickou metodu $createElement$(\textit{tagName}). Metodu můžeme tedy volat z třídy \textbf{Document} nebo z již existujícího objektu. To samá platí i v případě metody createTextNode(), která souží k vytvoření textu, který se poté může vložir do elementu.
+
+Pro přidání elementu do jiného elementu použijeme metodu $appendChild$(\textit{newChild}) nebo $insertBefore$(\textit{newChild}, \textit{refChild}). Chceme-li nahradit jeden element druhým, použijeme metodu $replaceChild$(\textit{newChild}, \textit{oldChild}). Pro mazání elementu se používá metoda $removeChild$(\textit{oldChild}). K získání informace, zdali element obsahuje atributy, zavoláme metody $hasAttributes$(). Všechny tyto metody jsou metody třídy \textbf{Node}. Třídy jako \textbf{Document} či \textbf{Element}, stejně jako všechny ostatní prvky XML dokumentu, jsou podtřídami třídy \textbf{Node}, tudíž i ony dědí tyto metody.
+
+Atributy nastavíme u objektů třídy \textbf{Element} pomocí metody $setAttribute$(\textit{name}, \textit{value}). Metodou $hasAttribute$(\textit{name}) se dotazujeme, zdali daný element obsahuje atribut \textit{name}. Pomocí metody $getAttribute$(\textit{name}) získáme hodnotu atributu \textit{name}. A pomocí metody $removeAttribute$(name) smažeme atribut \textit{name}.
+
+Metoda $getElementsByTagName$(\textit{tagName}) vrací seznam elementů korespondující s \textit{tagName} a potomky daného elementu, nachází se v daném elementu.
+
+XML dokument uložíme do souboru zavoláním metody writexml(\textit{file}, \textit{indent}, \textit{addindent}, \textit{encoding}) dané instance třídy Document. \textit{file} je soubor připravený pro zápis, \textit{indent} udává odsazení na začátku nového elementu (například začátek nového řádku), \textit{addindent} udává přírůstkové odsazení pro potomky daného elementu (například tabulátor) a \textit{encoding} je kódování. Pouze \textit{file} je povinný parametr. 
+
+Příklad z [\autoref{xml:example}] bychom tedy mohli vytvořit kódem [\autoref{xml:xml}] a zapsat do souboru [\autoref{xml:save}]. \\
+
+\newpage
+\begin{lstlisting}[label=xml:xml,caption={ukázka tvorby XML dokumentu z [\autoref{xml:example}]}, morekeywords={Document, createElement, setAttribute, createTextNode, addChild}]
+from xml.dom.minidom import Document
+
+doc = Document()
+
+graph = Document().createElement("Graph")
+graph.setAttribute("name","Addition two rasters")
+doc.addChild(graph)
+
+graphDesc = Document().createTextNode("Description...")
+graph.addChild(graphDesc)
+
+subGraph = doc.createElement("SubGraph")
+subGraph.setAttribute("id","17")
+graph.addChild(subGraph)
+
+module01 = doc.createElement("Module")
+module01.setAttribute("id","769")
+module01.setAttribute("name","Input raster by path")
+module01Desc = doc.createTextNode("You can register ... the path.")
+module01.addChild(module01Desc)
+tag = doc.createElement("Tag")
+tagDesc = doc.createTextNode("workflow builder")
+module01.addChild(tag)
+subGraph.addChild(module01)
+
+module02 = doc.createElement("Module")
+module02.setAttribute("id","998")
+module02.setAttribute("name","Operations with two rasters")
+module02Desc = doc.createTextNode("Pixel by pixel ... rasters.")
+module02.addChild(module02Desc)
+subGraph.addChild(module02)
+\end{lstlisting}
+
+\newpage
+\begin{lstlisting}[label=xml:save,caption={uložení XML dokumentu do souboru}]
+from xml.dom import Document
+
+file = open("xml.xml", "w")
+
+doc = Document()
+doc.writexml(file, indent="\n",  addindent="\t", encoding="UTF-8")
+
+file.close()
+
+\end{lstlisting}
+
+Pro otevření souboru použijeme metodu $xml.minidom.parse$(\textit{path}), kde \textit{path} je cesta k xml souboru.
 
 %Node - zakladni element, od kterého všechny elementy dědí
 %Document
@@ -44,9 +106,4 @@ Pro práci s XML dokumenty existuje v prostředí jazyka Python několik modulů
 %	\caption{atributy elementu Graph}
 %	\label{tab:graph}
 %\end{table}
-
-načtení xml
-
--------------
-
 

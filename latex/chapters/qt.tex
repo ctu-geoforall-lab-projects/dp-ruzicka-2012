@@ -9,7 +9,9 @@
 V současné době se vývojem Qt zabývá firma Nokia, která Qt koupila v roce 2008 od norské společnosti Trolltech. Společnost Trolltech započala s vývojem Qt v roce 1999. Qt je poměrně mocný soubor nástrojů pro psaní grafických aplikací v jazyce C++. Není to ale pouze knihovna pro psaní GUI. Qt nabízí také řadu programů, které usnadňují vývojáři práci. Například velmi kvalitní IDE v podobě Qt Creator či Qt Designer pro pohodlnou tvorbu grafického rozhraní pouhým přetahováním widgetů myší. Qt Designer umožňuje pohodlně rozvrhnout a umístit jednotlivé widgety, seskupovat je do layoutů či nastavovat parametry. \\
 \indent Existuje také mimo jiné verze pro Python - v současnosti verze PyQt4. PyQt je vyvíjena firmou Riverbank Computing. Z rodiny Qt, resp. PyQt, se v této práci využila samotná knihovna pro psaní kódu, obzvláště pak její Graphics View Framework, a program QtDesigner.
 
-V této podkapitole se také zmíním o architektuře Model View Controller (MVC), a její implementaci v Qt, kterou jsem použil u Processing Manageru (toolbox pro QGIS Processing Framework), a Graphics View Framework, který jsem využil při práci na vizuální stránce práce. V závěru zmíním projekt VisTrails, který byl inspirací při návrhu grafiky Workflow Builderu. 
+V této podkapitole se také zmíním o architektuře Model View Controller (MVC), a její implementaci v Qt, kterou jsem použil u Processing Manageru (toolbox pro QGIS Processing Framework), a Graphics View Framework, který jsem využil při práci na vizuální stránce práce. V závěru zmíním projekt VisTrails, který byl inspirací při návrhu grafického znázornění Workflow Builderu. 
+
+Pro bližší informace o Qt (i o PyQt4) a jejich možnostech doporučuji oficiální dokumentaci Qt, která je dostupná online a je na velmi vysoké úrovni. [viz \cite{qt:www}]
 
 \begin{figure}[h]
 	\centering
@@ -209,8 +211,9 @@ Pro data, která budou zobrazována jako seznam, můžeme využít pohled \textb
 \subsubsection*{Delegate}
 Všichni delegáti musí být potomky abstraktní třídy \textbf{QAbstractItemDelegate}. Qt nám nabízí k přímému použití třídy QItemDelegate a QStyledItemDelegate. $View$ má defalutně nastaveného delegáta QStyledItemDelegate. Pomocí delegáta můžeme určit, jak se budou dané položky z modelu zobrazovat a jak se budou editovat. 
 
-Pakliže máme v modelu například jako data uloženy studenty a chceme, aby byli vypisováni studenti modře a studentky červeně můžeme si vytvořit vlastního delegáta, který nám to umožní. V tomto případě [ukázka kódu \ref{qdelegate}] využijeme QStyledItemDelegate a přepíšeme metodu $paint$ například takto: \\
+Pakliže máme v modelu například jako data uloženy studenty a chceme, aby byli vypisováni studenti modře a studentky červeně můžeme si vytvořit vlastního delegáta, který nám to umožní. V tomto případě [\lstlistingname \ref{qdelegate:paint}] využijeme QItemDelegate a přepíšeme metodu $paint$. \\
 
+\newpage
 \begin{lstlisting}[label=qdelegate:paint,caption={Delegate - přepsání metody $paint$}, morekeywords={QItemDelegate, Qt, QFont, AlignLeft, DisplayRole, UserRole, QPen}]
 class Delegate(QItemDelegate):
     def __init__(self, parent=None, *args):
@@ -240,8 +243,8 @@ class Delegate(QItemDelegate):
         
 \noindent V tomto příkladě \ref{qdelegate:paint} předpokládáme, že data (v podobě indexů) obsahují informaci o pohlaví uloženou pod rolí $Qt.UserRole + 3$.
 
-Editor (widget pro editaci dat) nastavíme reimplementací metody $createEditor$, která vrací QWidget. Aby se po editaci změnila data v modelu, musíme také reimplementovat metodu $setModelData$. V ukázce kódu \ref{qdelegate:createEditor} předpokládáme, že třída $editStud$ je widget, který je složen z dvou dalších widgetů - QLineEdit pro editaci jména a QSpinBox pro nastavení věku. \\
-
+Editor (widget pro editaci dat) nastavíme reimplementací metody $createEditor$, která vrací QWidget. Aby se po editaci změnila data v modelu, musíme také reimplementovat metodu $setModelData$. V [\lstlistingname \ref{qdelegate:createEditor}] předpokládáme, že třída $editStud$ je widget, který je složen z dvou dalších widgetů - QLineEdit pro editaci jména a QSpinBox pro nastavení věku. \\
+\newpage
 \begin{lstlisting}[label=qdelegate:createEditor,caption={Delegate - přepsání metod $createEditor$ a $setModelData$}, morekeywords={QItemDelegate, Qt, QFont, AlignLeft, DisplayRole, UserRole, QPen}]
 class Delegate(QItemDelegate):
     def __init__(self, parent=None):
@@ -283,13 +286,12 @@ Tohoto mechanismu jsem využil při přetahování modulů z Processing Manageru
 %%% Graphics View Framework %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Graphics View Framework}
-Graphics View Framework nabízí prostředí pro práci s velkým počtem grafických dvojrozměrných prvků. Nabízí také widget, ve kterém se dané prvky zobrazují. Podporuje funkce jako zoom nebo rotaci. Prostředí umožňuje spravovat klasické události jako kliknutí myši, její pohyb či stisknutí klávesy. 
+Graphics View Framework nabízí prostředí pro práci s velkým počtem dvojrozměrných prvků. Nabízí také widget (\textbf{QGraphicsView}), ve kterém se dané prvky zobrazují. Podporuje funkce jako zoom, změna měřítka os nebo rotaci. Prostředí umožňuje spravovat klasické události jako je kliknutí myši, její pohyb či stisknutí klávesy. 
 
-Prostředí staví, podobně jako model-view architektura, na principu, kdy jsou samotná data oddělena od způsoby jejich zobrazení. V Graphics View Framework nahrazuje model scénou (\textbf{QGraphicsScene}) a pohled zastupuje \textbf{QGraphicsView}. Základní třídou grafických prvků je \textbf{QGraphicsItem}. Z této třídy poté dědí několik dalších jejich reimplementací jako QGraphicsRectItem, QGraphicsPathItem či QGraphicsSimpleTextItem. 
+Prostředí staví, podobně jako model-view architektura, na principu, kdy jsou samotná data oddělena od způsoby jejich zobrazení. V Graphics View Framework nahrazuje je model scénou (\textbf{QGraphicsScene}) a pohled zastupuje třída \textbf{QGraphicsView}. Základní třídou dvojrozměrných prvků je \textbf{QGraphicsItem}. Z této třídy poté dědí několik dalších jejich reimplementací jako QGraphicsRectItem, QGraphicsPathItem či QGraphicsSimpleTextItem. 
 
 \subsubsection*{QGraphicsItem}
-QGraphicsItem je základní třída, ze které vychází ostatní grafické 2D prvky. Pomocí metody setPos se nastaví pozice v rodiči. Pakliže žádný rodič není, bere se pozice ve scéně (QGraphicsScene). V Graphics View Framework také funguje hierarchie. Prvkům můžeme nastavit rodiče buď při jejich vytváření, či pomocí metody $setParentItem$(QGraphicsItem parent). Prvkům můžeme nastavit různé vlastnosti například jak budou graficky vypadat či zdali mohou být přesouvány. Mezi standardní grafické prvky, které reprezentují klasické tvary, patří:\\
-
+QGraphicsItem je základní třída, ze které vychází ostatní 2D objekty. Pomocí metody $setPos$ se nastaví pozice vůči rodiči. Pakliže žádný rodič není, bere se pozice ve scéně (QGraphicsScene). V Graphics View Framework také funguje hierarchie. Prvkům můžeme nastavit rodiče buď při jejich vytváření, či pomocí metody $setParentItem$(QGraphicsItem parent). Prvkům můžeme nastavit různé vlastnosti jako jak budou graficky vypadat či zdali mohou být přesouvány. Mezi standardní grafické prvky, které reprezentují klasické tvary, patří:\\
 \begin{itemize}
 	\item QGraphicsRectItem
 	\item QGraphicsPathItem
@@ -298,7 +300,7 @@ QGraphicsItem je základní třída, ze které vychází ostatní grafické 2D p
 	\item \ldots
 \end{itemize}
  
-Prvkům můžeme dále nastavovat tzv.ToolTip pomocí metody $setToolTip$(QString toolTip) či tzv. flagy pomocí $setFlag$(GraphicsItemFlag flag, bool enabled = true) a $setFlags$(GraphicsItemFlags flags). Flagy slouží k nastavení chování prvku. Například chceme-li s prvkem pohybovat, nastavíme flagy QGraphicsItem.ItemIsMovable, QGraphicsItem.ItemIsSelectable a QGraphicsItem.ItemIsFocusable na hodnotu true [viz ukázka kódu \ref{qgraphicsitem:flags}].\\
+Prvkům můžeme dále nastavovat tzv.ToolTip pomocí metody $setToolTip$(QString toolTip) či tzv. flagy pomocí $setFlag$(GraphicsItemFlag flag, bool enabled = true) a $setFlags$(GraphicsItemFlags flags). Flagy slouží k nastavení chování prvku. Například chceme-li s prvkem pohybovat, nastavíme flagy QGraphicsItem.ItemIsMovable, QGraphicsItem.ItemIsSelectable a QGraphicsItem.ItemIsFocusable na hodnotu true [viz Ukázka kódu \ref{qgraphicsitem:flags}].\\
  
 \begin{lstlisting}[label=qgraphicsitem:flags,caption={Nastavení flagů u QGraphicsRectItem}, morekeywords={QGraphicsItem, QGraphicsRectItem}] 
 	rect = QGraphicsRectItem()
@@ -308,12 +310,12 @@ Prvkům můžeme dále nastavovat tzv.ToolTip pomocí metody $setToolTip$(QStrin
 \end{lstlisting}
  
 \subsubsection*{QGraphicsScene}
-Do scény se prvky přidávají pomocí metody $addItem$(QGraphicsItem item) a mažou se ze scény pomocí $removeItem$(QGraphicsItem item). Pro smazání všech prvků ve scéně použijeme metodu $clear$(). Další užitečné metody jsou například $items$(), která nám vrací všechny prvky scény, $itemAt$(QPointF point), která nám vrací prvek na vybrané pozici, či $selectedItems$(), která nám vrací seznam vybraných prvků.
+Obecně se do scény prvky přidávají pomocí metody $addItem$(QGraphicsItem item). U klasických tvarů jako čtyřúhelník, elipsa či linie můžeme použít rovnou metody k tomu určené jako $addRect$(QRectF rect), $addEllipse$(QRectF rect) či $addLine$(QLine line). Prvky se mažou ze scény pomocí $removeItem$(QGraphicsItem item). Pro smazání všech prvků ve scéně slouží metoda $clear$(). Další užitečné metody jsou $items$(), která vrací všechny prvky scény, $itemAt$(QPointF point) vracící prvek na vybrané pozici ve scéně, či $selectedItems$(), která nám vrací seznam prvků, které jsou vybrány.
 
 \subsubsection*{QGraphicsView}
-U QGraphicsView nastavíme scénu pomocí setScene(). Dále může nastavit možnost přibližování a oddalování, měřítko, barvu pozadí, vyhlazování hran u prvků, můžeme rotovat scénu atp.
+U QGraphicsView nastavíme scénu pomocí $setScene$(). Dále může nastavit možnost přibližování a oddalování, měřítko, barvu pozadí, vyhlazování hran u prvků, můžeme rotovat scénu atp.
 
-Na obrázku je vidět jedna scéna zobrazena ve dvou rozdílných pohledech. Změna scény provedená v jednom pohledu, se projeví také v druhém pohledu.
+Na obrázku Obr. \ref{gsf} je vidět jedna scéna zobrazena ve dvou rozdílných pohledech. Změna scény provedená v jednom pohledu, se projeví také v druhém pohledu. U pohledu vpravo byla nastavena barva pozadí pomocí metody $setBackgroundBrush$(QBrush brush), změněno měřítko os pomocí $scale$(int x, int y) a scéna byla otočena o 45$^\circ$ pomocí $rotate$(int angle). \\
 
 \begin{figure}[h]
 	\centering
@@ -322,12 +324,21 @@ Na obrázku je vidět jedna scéna zobrazena ve dvou rozdílných pohledech. Zm�
 	\label{gsf}
 \end{figure}
 
+Při tvorbě vlastního pohledu můžeme reimplementovat metody pro správu Drag and Drop prostředí ($mousePressEvent$, $dragEnterEvent$, $dragMoveEvent$, $dropEvent$...), spravovat vstup z klávesnice ($keyPressEvent$, $keyReleaseEvent$), události vyvolané myší ($mousePressEvent$, $mouseDoubleClickEvent$, $mouseMoveEvent$...) či metodu $wheelEvent$ pro definování chování widgetu při použití prostředního kolečka myši (QWheelEvent je defaultně ignorován).
 
-\subsection{VisTrails, Orange}
-Na začátku práce na Workflow Builderu se nabízela možnost využít některých svobodných projektů pro modelování workflow diagramů. Vzhledem k tomu, že QGIS využívá knihovnu Qt a QGIS Processing framework samotný je psaný  v Pythonu, naskýtali se jako možnosti inspirace projekty Orange či VisTrails.
+\subsection{VisTrails}
 
-Nakonec mě nejvíce oslovilo grafické zpracování VisTrails. Uživatel na první pohled vidí, který parametr je s kterým spojen. Ne pouze který modul je s kterým spojen jak to často bývá u podobných programů. Jal jsem se tedy studovat kód a využil jsem prvky scény QGraphicsModule, QGraphicsPort a QGraphicsConnection.
+VisTrails je systém pro správu workflow diagramů vyvíjený na University of Utah. Je napsán v Pythonu za pomoci knihovny PyQt. Systém je open source a uvolněný pod licencí GPL v2. 
 
-Obrazek
+Na začátku práce na Workflow Builderu se nabízela možnost využít některých svobodných projektů pro modelování workflow diagramů. Vzhledem k tomu, že QGIS využívá knihovnu Qt a QGIS Processing framework samotný je psaný  v Pythonu, naskýtali se jako možnosti inspirace projekty Orange či \footnotemark{\index{VisTrails} VisTrails}\footnotetext{http://www.vistrails.org/index.php/Main\_Page}.
 
-%VisTrails is a scientific workflow management system developed at the Scientific Computing and Imaging Institute at the University of Utah that provides support for data exploration and visualization. It is written in Python and employs Qt via PyQt bindings. The system is open source, released under the GPL v2 license. The pre-compiled versions for Windows, Mac OS X, and Linux come with an installer and several packages, including VTK, matplotlib, and ImageMagick. VisTrails also supports user-defined packages.
+Nakonec mě nejvíce oslovilo grafické zpracování VisTrails [viz Obr. \ref{vt}]. Uživatel na první pohled vidí, který parametr je s kterým spojen. Ne pouze který modul je s kterým spojen jak to často bývá u podobných programů. Jal jsem se tedy studovat kód a využil jsem prvky scény \textbf{QGraphicsModule} reprezentující modul, \textbf{QGraphicsPort} reprezentující vstupní a výstupní parametry modulu a \textbf{QGraphicsConnection}, reimplementace třídy QGraphicsPathItem a  reprezentující spojení mezi parametry. Dále jsem se inspiroval postranním panelem, který zobrazuje informace i právě vybraném modulu a umožňuje také nastavování parametrů.
+
+\newpage
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{pictures/qt/vt}
+	\caption{Ukázka spojení prvků v systému VisTrails.}
+	\label{vt}
+\end{figure}

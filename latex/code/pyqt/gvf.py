@@ -19,6 +19,10 @@ class GraphicsView(QGraphicsView):
         # ten faktor je prevzat z knihy
         factor = 1.41 ** (-event.delta() / 240.0) # event.delta() vraci hodnotu, o kolik se kolecko pootocilo. (+znamena, ze bylo toceno od uzivatele, -bylo toceno k uzivateli)
         self.scale(factor, factor)
+        
+    def mouseDoubleClickEvent(self, event):
+        dlg = QMessageBox(self)
+        dlg.show()
 
 def main():
     """

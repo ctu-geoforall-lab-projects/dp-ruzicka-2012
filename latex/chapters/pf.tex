@@ -12,10 +12,9 @@ QGIS Processing Framework vznikl v rámci projektu \footnotemark{GSoC 2011} \foo
 
 V době psaní této práce byla na světě první verze Processing Frameworku a vše nasvědčovalo tomu, že práce na frameworku budou pokračovat a nástroje v Processing Frameworku budou přibývat. Existovala totiž pouze částečná  podpora pro funkce z SAGA GIS a plugin zpřístupňující funkce \index{Orfeo Toolbox, OTB} Orfeo Toolboxu (OTB). Orfeo Toolbox je svobodný software poskytující nástroje pro zpracování snímku z \index{DPZ, dálkový průzkum Země} dálkového průzkumu Země.
 
-V době mého připojení k Processing Frameworku byl projekt teprve na začátku. Pro seznámení s projektem jsem přepsal Processing Manager (toolbox) z QTreeWidget pomocí QTreeView do MVC architektury.
+V době mého připojení k QGIS Processing Frameworku byl projekt na začátku. Pro seznámení s projektem jsem přepsal Processing Manager (toolbox) z QTreeWidget do MVC architektury.
 
-{\color{red} Napsat o tom alespoň odstavecek}
-Processing Manager zpřístupňuje z jednoho místa všechny moduly dostupné skrze QGIS Processing Framework. Moduly jsou rozděleny podle tagů do různých skupin, větví. Každý modul obsahuje seznam tagů, které napovídají, k čemu daný modul slouží. Uživatel může najít hledaný modul prohledáváním samotného stromu, či využít vyhledávací okénko v horní části panelu. Processing manager prohledává tagy daného modulu a jeho název. Modul obsahuje ještě popis, ale protože se tagy generují z tohoto popisu, nemá cenu popis procházet \figurename \ref{pf:pm}.
+Processing Manager je část QGIS Processing Frameworku, která zpřístupňuje všechny moduly dostupné skrze QGIS Processing Framework z jednoho místa. Jedná se o panel se seznamem modulů, které jsou rozděleny podle tagů do různých skupin (například 'raster', 'hydrology'). Každý modul obsahuje seznam tagů, které napovídají, k čemu daný modul slouží. Uživatel může najít hledaný modul prohledáváním samotného stromu, či využít vyhledávací okénko v horní části panelu. Processing Manager prohledává tagy daného modulu a jeho název. Modul obsahuje dále popis, ale protože se tagy generují z tohoto popisu, nemá cenu popis procházet \figurename \ref{pf:pm}.
 
 \begin{figure}
 	\centering
@@ -24,7 +23,7 @@ Processing Manager zpřístupňuje z jednoho místa všechny moduly dostupné sk
   	\label{pf:pm}
 \end{figure}
 
-{\color{red}Dostupnost skrze pythoní konzoli v QGISU. Nacitani modulu, nastavování parametrů, spuštění. takže asi zase malé tabulky - metody a atributy Modulu, Parametru.}
+{\color{red}Dostupnost skrze pythoní konzoli v QGISU. Načítání modulu, nastavování parametrů, spuštění. takže asi zase malé tabulky - metody a atributy Modulu, Parametru.}
 
 %%%%%%%%%%%%%%%%%%%
 %%% SAGA Plugin %%%
