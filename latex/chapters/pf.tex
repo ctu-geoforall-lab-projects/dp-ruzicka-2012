@@ -14,7 +14,7 @@ V době psaní této práce byla na světě první verze Processing Frameworku a
 
 V době mého připojení k QGIS Processing Frameworku byl projekt na začátku. Pro seznámení s projektem jsem přepsal Processing Manager (toolbox) z QTreeWidget do MVC architektury.
 
-Processing Manager je část QGIS Processing Frameworku, která zpřístupňuje všechny moduly dostupné skrze QGIS Processing Framework z jednoho místa. Jedná se o panel se seznamem modulů, které jsou rozděleny podle tagů do různých skupin (například 'raster', 'hydrology'). Každý modul obsahuje seznam tagů, které napovídají, k čemu daný modul slouží. Uživatel může najít hledaný modul prohledáváním samotného stromu, či využít vyhledávací okénko v horní části panelu. Processing Manager prohledává tagy daného modulu a jeho název. Modul obsahuje dále popis, ale protože se tagy generují z tohoto popisu, nemá cenu popis procházet \figurename \ref{pf:pm}.
+Processing Manager je část QGIS Processing Frameworku, která zpřístupňuje všechny moduly dostupné skrze QGIS Processing Framework z jednoho místa. Jedná se o panel se seznamem modulů, které jsou rozděleny podle tagů do různých skupin (například 'raster', 'hydrology'). Každý modul obsahuje seznam tagů, které napovídají, k čemu daný modul slouží. Uživatel může najít hledaný modul prohledáváním samotného stromu, či využít vyhledávací okénko v horní části panelu. Processing Manager prohledává tagy daného modulu a jeho název. Modul obsahuje dále popis, ale protože se tagy generují z tohoto popisu, není nutné popis procházet \figurename \ref{pf:pm}.
 
 \begin{figure}
 	\centering
@@ -23,7 +23,66 @@ Processing Manager je část QGIS Processing Frameworku, která zpřístupňuje 
   	\label{pf:pm}
 \end{figure}
 
-{\color{red}Dostupnost skrze pythoní konzoli v QGISU. Načítání modulu, nastavování parametrů, spuštění. takže asi zase malé tabulky - metody a atributy Modulu, Parametru.}
+Modul je reprezentován třídou \textbf{Module} a jeho instance třídou \textbf{ModuleInstace}. Z třídy \textbf{Module} získáváme informace o modulu. Pomocí metody $name$() získáme jméno modulu, metoda $description$() vrací popis, metoda $tags$() a metoda $instance$() vrací instanci třídy \textbf{ModuleInstace} daného modulu. Zavoláním metody $parameters$() získáme seznam parametrů daného modulu. Parametry jsou třídy \textbf{Parameter}.
+
+U \textbf{ModuleInstace} můžeme pomocí metody $setValue$(Parameter, hodnota) přiřazovat parametrům konkrétní hodnoty. Metodou $value$(Paramter) získáme hodnotu parametru. Pomocí metody $setState$() s parametrem "2" spouštíme daný modul. Metoda $module$() vrací module (Module).
+
+Parametry jsou třídy \textbf{Parameter}. Uchovávají v sobě informaci o názvu a popisu parametru, zdali je parametr povinný, jakého je typu a role (např. vstupní, výstupní) a jeho defaultní hodnotu. Metody třídy \textbf{Parameter} [\ref{tab:metPar}].
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|}
+	\hline
+	metoda & popis \\
+	\hline
+	\hline
+	name() & vrací jméno\\
+	description() & vrací popis\\
+	type() & vrací typ [viz Tabulka \ref{tab:pf_parametry} \\
+	setRole(role) & nastaví roli\\
+	role() & vrací roli\\
+	setMandatory(bool) & nastaví zdali je parametr povinný\\
+	isMandatory() & vrátí hodnotu, zdali je parametr povinný\\
+	setDefaultValue() & nastaví defaultní hodnotu parametru\\
+	defaultValue() & vrátí defaultní hodnotu parametru \\
+	\hline
+	\end{tabular}
+	\caption{Metody třídy Parameter.}
+	\label{tab:metPar}
+\end{table}
+
+Modulů z \textbf{QGIS Processing Framework} jsou přístupné buď přes \textbf{Processing Manager} nebo přes pythoní konzoli [\autoref{pf:konzole}]. Konzoli lze spustit například klávesovou zkratkou \textbf{Ctrl+Alt+ p}.
+
+\begin{lstlisting}[label=pf:konzole,caption={Přístup k modulům přes konzoli.}] 
+import processing
+
+# seznam vsech registrovanych modulu
+processing.framework.modules()
+	
+# vrati dany modulu
+mod = processing.framework['nazev_modulu']
+# vraci seznam parametru daneho modulu
+mod.parameters()
+
+# vytvori instanci modulu
+instance = mod.instance()
+# nastavi paramter
+instance.setValue(parametr, hodnota)
+# spusti modul
+instance.setState(2)
+
+# ziskani hodnoty paremetru
+instance.value(parametr2)
+\end{lstlisting}
+
+Spouští-li se modul přes \textbf{Processing Manager}, objeví se dialogové okno pro natavení parametrů modulu a následné spuštění [viz \figurename \ref{pf:dialog}].
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{pictures/pf/processing_dialog}
+	\caption{QGIS Processing Framework - okno pro nastavení a spuštění modulu}
+  	\label{pf:dialog}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%
 %%% SAGA Plugin %%%
@@ -32,7 +91,7 @@ Processing Manager je část QGIS Processing Frameworku, která zpřístupňuje 
 \subsection{SAGA Plugin}
 SAGA Plugin vznikl v rámci stejného projektu Camila Polymeris pro GSoC 2011. Měl zpřístupňovat funkce programu SAGA GIS pomocí jeho API uživatelům Quantum GIS. Na stránkách projektu [\cite{pf:supportedModules}] se deklaruje, že by mělo být podporováno 170 modulů z celkových 425. Toto číslo vychází z předpokladu, že moduly, u kterých jsou všechny vstupní i výstupní parametry podporovány, pracují správně. Podporované parametry SAGA GIS a jejich reprezentace v Processing Frameworku \ref{tab:saga_parameters}. Parametry SAGA GIS, které nejsou podporované Processing Frameworkem$:$ \textit{Table field, Data Object, Grid list, Table, Node, Shape list, Parameters, Point Cloud, TIN, Static table, Table list, Color, TIN list a Colors}. Dále nejsou podporované interaktivní moduly. Bohužel ale nebyl plugin plně dokončen a skutečný počet správně pracujících pluginů není roven 170. \\
 
-\begin{table}	
+\begin{table}[h]
 	\centering
 	\begin{tabular}{|c|c|}
 		\hline
@@ -70,11 +129,11 @@ SAGA Plugin vznikl v rámci stejného projektu Camila Polymeris pro GSoC 2011. M
 
 \subsection{Psaní pluginu pro PF}
 
-QGIS Processing Framework funguje tak, že si každý může při psaní pluginu pro QGIS může při dodržení pár pravidel \textit{"zaregistrovat"} zaregistrovat svůj modul do frameworku. 
+QGIS Processing Framework funguje tak, že si každý při psaní pluginu pro QGIS může při dodržení pár pravidel zaregistrovat svůj modul do frameworku. 
 
 Každý plugin může mít několik vstupních a výstupních parametrů. V současné době dovoluje framework uživateli použít parametry \ref{tab:pf_parametry}.
 
-\begin{table}	
+\begin{table}[h]	
 	\centering
 	\begin{tabular}{|c|c|c|}
 		\hline
@@ -105,7 +164,7 @@ Každý plugin může mít několik vstupních a výstupních parametrů. V sou�
 	\label{tab:pf_parametry}
 \end{table}
 
-Obr. Dialogového okna
+Při psaní pluginy, který registruje svoje moduly do \textbf{QGIS Processing Framework}u se postupuje stejně, jako když se píšu normální plugin pro QGIS.
 
 %%%%%%%%%%%%%%%%%%
 %%% Conclusion %%%
@@ -113,8 +172,10 @@ Obr. Dialogového okna
 
 \subsection{Závěr}
 
-Chtělo by to vyřešit vstupní vrstvy aby například rastrová vrstva zadaná jako PathParameter byla kompatibilní s parametrem RasterLayerParameter. Dát vývojáři pluginu možnost dát uživateli možnost zadat vrstvu buď pomocí cesty nebo výběrem z jich načtených vrstev. Dát uživateli obě možnosti.
+Bylo by dobré vyřešit vstupní vrstvy aby například rastrová vrstva zadaná jako PathParameter byla kompatibilní s parametrem RasterLayerParameter. Dát vývojáři pluginu možnost dát, aby mohl  uživatel zadat vrstvu buď pomocí cesty nebo výběrem z již načtených vrstev. Dát uživateli obě možnosti.
 
-Je napsán OTB Plugin pro zpracování družicových snímků a rozepsán SAGA Plugin s podporou několika pluginů z SAGA GIS.
+Do této chvíle je napsán OTB Plugin pro zpracování družicových snímků a rozepsán SAGA Plugin s podporou několika pluginů z SAGA GIS.
 
-Camilo Polymeris měl v plánu pokračovat na projektu v rámci GSoC 2012, ale po objevení frameworku SEXTANTE svoji žádost stáhl a zapojil se do prací nad SEXTANTE. QGIS Processing Framework se tedy zdá být mrtvým projektem. Alespoň prozatím...
+Camilo Polymeris měl v plánu pokračovat na projektu v rámci GSoC 2012, ale po objevení frameworku SEXTANTE svoji žádost stáhl a zapojil se do prací nad SEXTANTE. QGIS Processing Framework se tedy zdá být mrtvým projektem.
+
+\newpage
