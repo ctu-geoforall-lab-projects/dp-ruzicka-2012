@@ -1,0 +1,60 @@
+commit dca2339293432acf8fc22dd40a78eb9b5f6516f3
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Wed Nov 2 00:49:15 2011 +0000
+
+    Issue #55, convert QString from path dialog to python string.
+
+commit 9beb057101cb1b448513874e4d9f73c9eb6e2f8a
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Mon Oct 17 16:05:52 2011 -0300
+
+    More float_info fixes. Now in dialog.py.
+
+commit fce111a65f113e812ff4b6ad084a4c7f48279e0b
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Sun Oct 16 15:17:31 2011 -0300
+
+    Workaround if float_info is missing.
+
+commit b2400811153af645ba1805e5bc72c00fe1db1f58
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Sat Oct 8 17:22:55 2011 -0300
+
+    Solve SAGA path issues.
+
+commit d73c46708129ff16d9e219af61746ad7523fc19d
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Sat Oct 8 17:17:43 2011 -0300
+
+    Progress bar update during raster coversion -- test of progress feature. (Issue #51)
+
+commit b105f3e36af6bfbb7ab2ad292db83b415d8551ac
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Sat Oct 8 17:17:03 2011 -0300
+
+    Progress paramter in moduleinstance + associated progress bar in GUI (Issue #51)
+
+commit e066e3f91e28b316c412bfdc78ac1efe18d876b9
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Sat Oct 8 16:55:36 2011 -0300
+
+    Log tab in module execution dialog (Issue #52).
+
+commit ca54980f0b38700b2c803dc063dbee6577e534cc
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Thu Oct 6 16:21:24 2011 -0300
+
+    Advanced/optional parameter tabs toggling.
+
+commit 6e703e3bd6391d2d48225685e3d0e18bd72f55aa
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Thu Oct 6 15:59:53 2011 -0300
+
+    Why u no test?
+    Fix typos/indentation problems.
+
+commit 28a28aeff688885b4e6b6f7e7d71b9d19aa08d39
+Author: Camilo Polymeris <cpolymeris@gmail.com>
+Date:   Thu Oct 6 15:31:24 2011 -0300
+
+    Link to new static "start" webpage.

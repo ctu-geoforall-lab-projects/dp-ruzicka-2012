@@ -1,0 +1,6 @@
+27,28c27,28
+< import processing
+< from processing.parameters import *
+---
+> import processingmanager.processing as processing
+> from processingmanager.processing.parameters import *

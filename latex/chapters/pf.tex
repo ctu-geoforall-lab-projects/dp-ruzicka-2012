@@ -14,22 +14,22 @@ V době psaní této práce byla na světě první verze Processing Frameworku a
 
 V době mého připojení k QGIS Processing Frameworku byl projekt na začátku. Pro seznámení s projektem jsem přepsal Processing Manager (toolbox) z QTreeWidget do MVC architektury.
 
-Processing Manager je část QGIS Processing Frameworku, která zpřístupňuje všechny moduly dostupné skrze QGIS Processing Framework z jednoho místa. Jedná se o panel se seznamem modulů, které jsou rozděleny podle tagů do různých skupin (například 'raster', 'hydrology'). Každý modul obsahuje seznam tagů, které napovídají, k čemu daný modul slouží. Uživatel může najít hledaný modul prohledáváním samotného stromu, či využít vyhledávací okénko v horní části panelu. Processing Manager prohledává tagy daného modulu a jeho název. Modul obsahuje dále popis, ale protože se tagy generují z tohoto popisu, není nutné popis procházet \figurename \ref{pf:pm}.
-
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{pictures/pf/processing_manager_small}
 	\caption{QGIS Processing Framework - Processing Manager}
   	\label{pf:pm}
 \end{figure}
 
+Processing Manager je část QGIS Processing Frameworku, která zpřístupňuje všechny moduly dostupné skrze QGIS Processing Framework z jednoho místa. Jedná se o panel se seznamem modulů, které jsou rozděleny podle tagů do různých skupin (například 'raster', 'hydrology'). Každý modul obsahuje seznam tagů, které napovídají, k čemu daný modul slouží. Uživatel může najít hledaný modul prohledáváním samotného stromu, či využít vyhledávací okénko v horní části panelu. Processing Manager prohledává tagy daného modulu a jeho název. Modul obsahuje dále popis, ale protože se tagy generují z tohoto popisu, není nutné popis procházet \figurename \ref{pf:pm}.
+
 Modul je reprezentován třídou \textbf{Module} a jeho instance třídou \textbf{ModuleInstace}. Z třídy \textbf{Module} získáváme informace o modulu. Pomocí metody $name$() získáme jméno modulu, metoda $description$() vrací popis, metoda $tags$() a metoda $instance$() vrací instanci třídy \textbf{ModuleInstace} daného modulu. Zavoláním metody $parameters$() získáme seznam parametrů daného modulu. Parametry jsou třídy \textbf{Parameter}.
 
 U \textbf{ModuleInstace} můžeme pomocí metody $setValue$(Parameter, hodnota) přiřazovat parametrům konkrétní hodnoty. Metodou $value$(Paramter) získáme hodnotu parametru. Pomocí metody $setState$() s parametrem "2" spouštíme daný modul. Metoda $module$() vrací module (Module).
 
-Parametry jsou třídy \textbf{Parameter}. Uchovávají v sobě informaci o názvu a popisu parametru, zdali je parametr povinný, jakého je typu a role (např. vstupní, výstupní) a jeho defaultní hodnotu. Metody třídy \textbf{Parameter} [\ref{tab:metPar}].
+Parametry jsou třídy \textbf{Parameter}. Uchovávají v sobě informaci o názvu a popisu parametru, zdali je parametr povinný, jakého je typu a role (např. vstupní, výstupní) a jeho defaultní hodnotu. Přehled metod třídy \textbf{Parameter} je zobrazen v [\tablename \ref{tab:metPar}].
 
-\begin{table}[h]
+\begin{table}[!]
 	\centering
 	\begin{tabular}{|c|c|}
 	\hline
@@ -51,7 +51,8 @@ Parametry jsou třídy \textbf{Parameter}. Uchovávají v sobě informaci o náz
 	\label{tab:metPar}
 \end{table}
 
-Modulů z \textbf{QGIS Processing Framework} jsou přístupné buď přes \textbf{Processing Manager} nebo přes pythoní konzoli [\autoref{pf:konzole}]. Konzoli lze spustit například klávesovou zkratkou \textbf{Ctrl+Alt+ p}.
+Modulů z \textbf{QGIS Processing Framework} jsou přístupné buď přes \textbf{Processing Manager} nebo přes pythoní konzoli [\autoref{pf:konzole}]. Konzoli lze spustit například klávesovou zkratkou \textbf{Ctrl+Alt+ p}. 
+\newpage
 
 \begin{lstlisting}[label=pf:konzole,caption={Přístup k modulům přes konzoli.}] 
 import processing
@@ -71,13 +72,13 @@ instance.setValue(parametr, hodnota)
 # spusti modul
 instance.setState(2)
 
-# ziskani hodnoty paremetru
+# ziskani hodnoty parametru
 instance.value(parametr2)
 \end{lstlisting}
 
-Spouští-li se modul přes \textbf{Processing Manager}, objeví se dialogové okno pro natavení parametrů modulu a následné spuštění [viz \figurename \ref{pf:dialog}].
+Spouští-li se modul přes \textbf{Processing Manager}, objeví se dialogové okno pro nastavení parametrů modulu a následné spuštění [viz \figurename \ref{pf:dialog}].
 
-\begin{figure}[h]
+\begin{figure}[!]
 	\centering
 	\includegraphics[scale=0.5]{pictures/pf/processing_dialog}
 	\caption{QGIS Processing Framework - okno pro nastavení a spuštění modulu}
@@ -87,9 +88,9 @@ Spouští-li se modul přes \textbf{Processing Manager}, objeví se dialogové o
 %%%%%%%%%%%%%%%%%%%
 %%% SAGA Plugin %%%
 %%%%%%%%%%%%%%%%%%%
-
+\newpage
 \subsection{SAGA Plugin}
-SAGA Plugin vznikl v rámci stejného projektu Camila Polymeris pro GSoC 2011. Měl zpřístupňovat funkce programu SAGA GIS pomocí jeho API uživatelům Quantum GIS. Na stránkách projektu [\cite{pf:supportedModules}] se deklaruje, že by mělo být podporováno 170 modulů z celkových 425. Toto číslo vychází z předpokladu, že moduly, u kterých jsou všechny vstupní i výstupní parametry podporovány, pracují správně. Podporované parametry SAGA GIS a jejich reprezentace v Processing Frameworku \ref{tab:saga_parameters}. Parametry SAGA GIS, které nejsou podporované Processing Frameworkem$:$ \textit{Table field, Data Object, Grid list, Table, Node, Shape list, Parameters, Point Cloud, TIN, Static table, Table list, Color, TIN list a Colors}. Dále nejsou podporované interaktivní moduly. Bohužel ale nebyl plugin plně dokončen a skutečný počet správně pracujících pluginů není roven 170. \\
+SAGA Plugin vznikl v rámci stejného projektu Camila Polymeris pro GSoC 2011. Měl zpřístupňovat funkce programu SAGA GIS pomocí jeho API uživatelům Quantum GIS. Na stránkách projektu \cite{pf:supportedModules} se deklaruje, že by mělo být podporováno 170 modulů z celkových 425. Toto číslo vychází z předpokladu, že moduly, u kterých jsou všechny vstupní i výstupní parametry podporovány, pracují správně. Podporované parametry SAGA GIS a jejich reprezentace v Processing Frameworku \ref{tab:saga_parameters}. Parametry SAGA GIS, které nejsou podporované Processing Frameworkem$:$ \textit{Table field, Data Object, Grid list, Table, Node, Shape list, Parameters, Point Cloud, TIN, Static table, Table list, Color, TIN list a Colors}. Dále nejsou podporované interaktivní moduly. Bohužel ale nebyl plugin plně dokončen a skutečný počet správně pracujících pluginů není roven 170. \\
 
 \begin{table}[h]
 	\centering
@@ -128,12 +129,13 @@ SAGA Plugin vznikl v rámci stejného projektu Camila Polymeris pro GSoC 2011. M
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Psaní pluginu pro PF}
+Plugin pro QGIS Processing Framework se v mnohém neliší od normálních pluginů psaných pro QGIS. Inicializační soubor se prakticky vůbec neliší. Třída reprezentující samotný plugin obsahuje navíc metodu \textit{modules}(), která vrací seznam modulů třídy processing.\textbf{Module} (dále jen Module), který poskytuje daný plugin. Plugin samotný se musí registrovat v frameworku. To se provede příkazem \begin{scriptsize}processing.framework.registerModuleProvider(self)\end{scriptsize}, který se vloží do metody \textit{initGUI}().
 
-QGIS Processing Framework funguje tak, že si každý při psaní pluginu pro QGIS může při dodržení pár pravidel zaregistrovat svůj modul do frameworku. 
+Plugin tedy může obsahovat několik modulů, které vrací pomocí metody \textit{modules}(). Každý modul se skládá ze sebe a ze svojí "instance". Tedy z podtříd tříd Module a processing.ModuleInstance (dále jen ModuleInstance). Module je pro daný modul základní třída, která definuje typy parametry modulu, jeho název, popis a tagy. A vrací jeho instanci v podobě ModuleInstance, která slouží ke spouštění modulu s nastavenými parametry a spravuje, co se děje po provedení modulu. To znamená, že pakliže chceme spustit modul, musíme nastavit parametry a ty se nastavují v instanci, ne v modulu samotném. Modul poté spustíme metodou instance setStatus(2). Instance by mela obsahovat kód, který vstupní parametry zpracuje a poté také nastaví výstupní hodnoty.
 
-Každý plugin může mít několik vstupních a výstupních parametrů. V současné době dovoluje framework uživateli použít parametry \ref{tab:pf_parametry}.
+Modul může mít několik vstupních a výstupních parametrů. V současné době dovoluje framework uživateli použít parametry \ref{tab:pf_parametry}.
 
-\begin{table}[h]	
+\begin{table}	
 	\centering
 	\begin{tabular}{|c|c|c|}
 		\hline
@@ -164,7 +166,67 @@ Každý plugin může mít několik vstupních a výstupních parametrů. V sou�
 	\label{tab:pf_parametry}
 \end{table}
 
-Při psaní pluginy, který registruje svoje moduly do \textbf{QGIS Processing Framework}u se postupuje stejně, jako když se píšu normální plugin pro QGIS.
+Jako příklad uvedeme plugin Plugin, který bude mít na vstupu dva parametry. Jeden parametr pro načtení cesty k rastrovému souboru a druhý pro zadání jeho názvu, pod kterým se objeví v QGISu. Výstup bude jeden - rastr třídy QgsRasterMapLayer. Příklad je pouze ilustrativní.
+
+Inicializační soubor nebudu uvádět, protože se nijak neliší od toho, když píšeme normální plugin pro QGIS. Soubor se samotným pluginem bude obsahovat třídu Plugin, která reprezentuje náš plugin [\autoref{pf:plugin}]. Dále třídu RasterToQgis(processing.Module) [\autoref{pf:rasterToQgis}] a třídu RasterToQgisInstance(processing.ModuleInstance) [\autoref{pf:rasterToQgisInstance}] .\\
+
+\newpage
+\begin{lstlisting}[caption={Třída Plugin pro QGIS Processing Framework}, label=pf:plugin, morekeywords={Plugin, __init__, modules, initGUI, unload}]
+class Plugin:
+    def __init__(self, iface):
+        self.iface = iface
+    def unload(self):
+        pass
+    def modules(self):
+        return [self.rasterInputLayer]
+    def initGui(self):
+        self.rasterInputLayer = RasterToQgis(self.iface)
+        processing.framework.registerModuleProvider(self)
+\end{lstlisting}
+\newpage
+\begin{lstlisting}[caption={Třída RasterToQgis reprezentující modul pro QGIS Processing Framework}, label=pf:rasterToQgis, morekeywords={processing.Module,RasterToQgis, __init__, instance, RasterToQgisInstance, PathParameter, StringParameter, RasterLayerParameter}]
+class RasterToQgis(processing.Module):
+    def __init__(self, iface = None):
+        self.iface = iface
+        self.inParamPath = PathParameter("Path to input raster",
+        	role=Parameter.Role.input)
+        self.inParamName = StringParameter("Name of layerr",
+        	role=Parameter.Role.input)
+        self.outParam = RasterLayerParameter("Output raster",
+        	role = Parameter.Role.output)
+        self.outParam.setMandatory(False)
+        processing.Module.__init__(self, "Input raster by path", 
+            description = "Description",
+            parameters = [self.inParamPath,self.inParamName,self.outParam], 
+            tags = ["raster", "input"])
+
+    def instance(self):
+        return RasterToQgisInstance(self, self.inParamPath,
+        							self.inParamName,  self.outParam)
+\end{lstlisting}
+
+V příkladu [\autoref{pf:rasterToQgis}] jsme u parametrů jsem nastavili pouze nejnutnější atributy jako název a roli. Role nám říká, zdali je parametr povinný či volitelný. U parametrů můžeme nastavit také popis či počáteční hodnotu při jejich tvorbě pomocí parametrů v konstruktoru \textit{description} a \textit{defaultValue}. Nastavit defaultní hodnotu můžeme také metodou \textit{setDefaultValue}(value). \\
+
+\begin{lstlisting}[caption={Třída RasterToQgisInstance reprezentující instanci modulu pro QGIS Processing Framework}, label=pf:rasterToQgisInstance, morekeywords={processing.ModuleInstance, RasterToQgisInstance, __init__, valueChangedSignal,onStateParameterChanged, QgsRasterLayer,setValue }]
+class RasterToQgisInstance(processing.ModuleInstance):
+    def __init__(self, module, inParamPath, inParamName,  outParam):
+        self.inParamPath = inParamPath
+        self.inParamName = inParamName
+        self.outParam = outParam
+        processing.ModuleInstance.__init__(self, module)
+        QObject.connect(self,
+            self.valueChangedSignal(self.stateParameter),
+            self.onStateParameterChanged)
+    def onStateParameterChanged(self, state):
+        if state == StateParameter.State.running:            
+            path = self[self.inParamPath]
+            name = self[self.inParamName]
+            raster = QgsRasterLayer(path, name)
+            self.setValue(self.outParam, raster)
+            self.setState(StateParameter.State.stopped)
+\end{lstlisting}
+
+Instance kontroluje stav (state) modulu. Je-li nastaven hodnotu 2 (StateParameter.State.running) vezme si vstupní parametry a na jejich základě vytvoří novou rastrovou vrstvu \textbf{QgsRasterLayer}. A tu nastaví do odpovídajícího výstupního parametru.
 
 %%%%%%%%%%%%%%%%%%
 %%% Conclusion %%%
@@ -172,10 +234,12 @@ Při psaní pluginy, který registruje svoje moduly do \textbf{QGIS Processing F
 
 \subsection{Závěr}
 
-Bylo by dobré vyřešit vstupní vrstvy aby například rastrová vrstva zadaná jako PathParameter byla kompatibilní s parametrem RasterLayerParameter. Dát vývojáři pluginu možnost dát, aby mohl  uživatel zadat vrstvu buď pomocí cesty nebo výběrem z již načtených vrstev. Dát uživateli obě možnosti.
+Bylo by dobré vyřešit vstupní vrstvy aby například rastrová vrstva zadaná jako PathParameter byla kompatibilní s parametrem RasterLayerParameter. Dát vývojáři pluginu možnost, aby mohl  uživatel zadat vrstvu buď pomocí cesty nebo výběrem z již načtených vrstev. Dát tedy uživateli obě možnosti.
 
 Do této chvíle je napsán OTB Plugin pro zpracování družicových snímků a rozepsán SAGA Plugin s podporou několika pluginů z SAGA GIS.
 
-Camilo Polymeris měl v plánu pokračovat na projektu v rámci GSoC 2012, ale po objevení frameworku SEXTANTE svoji žádost stáhl a zapojil se do prací nad SEXTANTE. QGIS Processing Framework se tedy zdá být mrtvým projektem.
+Camilo Polymeris měl v plánu pokračovat na projektu v rámci GSoC 2012, ale po objevení frameworku SEXTANTE svoji žádost stáhl a zapojil se do prací na SEXTANTE. QGIS Processing Framework se tedy zdá být mrtvým projektem.
+
+Dále bych chtěl upozornit, že během vývoje se změnila struktura dat. Na začátku bylo jádro frameworku uloženo v \begin{scriptsize}python/processing\end{scriptsize} a Processing Manager, GUI a dialog pro spouštění modulů v \begin{scriptsize}python/plugins/processingplugin\end{scriptsize}. V současné době je vše uloženo v \begin{scriptsize}python/processingmanager\end{scriptsize}, resp. jádro v \begin{scriptsize}python/processingmanager/processing\end{scriptsize}. To může na začátku psaní vlastního pluginu způsobit menší problém v chybně zadané cestě k frameworku.
 
 \newpage

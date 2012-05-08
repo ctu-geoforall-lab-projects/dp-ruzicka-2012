@@ -1,46 +1,51 @@
 \begin{theindex}
 
-  \item DPZ, d^^c3^^a1lkov^^c3^^bd prÅ^^afzkum ZemÄ^^9b, \hyperpage{22}
+  \item DOM, \hyperpage{38}
+  \item DPZ, d^^c3^^a1lkov^^c3^^bd prÅ^^afzkum ZemÄ^^9b, \hyperpage{30}
 
   \indexspace
 
-  \item Faunalia, \hyperpage{4}
-  \item fTools, \hyperpage{5}
+  \item Faunalia, \hyperpage{7}
+  \item fTools, \hyperpage{7}
 
   \indexspace
 
-  \item GDAL, \hyperpage{4}
-  \item GDAL, GdalTools, \hyperpage{5}
+  \item GDAL, \hyperpage{6}
+  \item GDAL, GdalTools, \hyperpage{7}
   \item geodata, \hyperpage{1}
   \item GIS, \hyperpage{1}
-  \item GRASS Plugin, \hyperpage{5}
+  \item GRASS Plugin, \hyperpage{7}
 
   \indexspace
 
-  \item OGR, \hyperpage{4}
-  \item Orfeo Toolbox, OTB, \hyperpage{22}
+  \item OGR, \hyperpage{6}
+  \item Orfeo Toolbox, OTB, \hyperpage{30}
 
   \indexspace
 
-  \item PyQGIS, \hyperpage{7}
+  \item PyQGIS, \hyperpage{9}
+  \item pyrcc4, \hyperpage{10}
   \item Python, \hyperpage{4}
+  \item pyuic4, \hyperpage{9}
 
   \indexspace
 
-  \item QGIS Processing Framework, \hyperpage{1}, \hyperpage{22}
-  \item QGIS,Quantum GIS, \hyperpage{4}
+  \item QGIS Processing Framework, \hyperpage{1}, \hyperpage{30}
+  \item QGIS,Quantum GIS, \hyperpage{6}
 
   \indexspace
 
   \item SAGA GIS, \hyperpage{2}
-  \item SEXTANT, \hyperpage{33}
+  \item SEXTANT, \hyperpage{59}
 
   \indexspace
 
-  \item VisTrails, \hyperpage{1}
+  \item VisTrails, \hyperpage{1}, \hyperpage{28}
 
   \indexspace
 
-  \item XML, \hyperpage{26}
+  \item XML, \hyperpage{38}
+  \item xml.dom, \hyperpage{38}
+  \item xml.dom.minidom, \hyperpage{38}
 
 \end{theindex}
