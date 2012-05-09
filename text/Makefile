@@ -13,7 +13,7 @@ pdf:
 
 clean:
 	rm -f *~ *.aux *.log *.out *.toc *.idx *.lol \
-	*.bbl *.blg *.ilg *.ind
+	*.bbl *.blg *.ilg *.ind *-blx.bib
 
 distclean:
 	make clean
