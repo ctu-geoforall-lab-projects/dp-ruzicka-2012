@@ -12,7 +12,8 @@ pdf:
 	pdflatex $(FILE).tex
 
 clean:
-	rm -f *~ *.aux *.log *.out *.toc
+	rm -f *~ *.aux *.log *.out *.toc *.idx *.lol \
+	*.bbl *.blg *.ilg *.ind
 
 distclean:
 	make clean
