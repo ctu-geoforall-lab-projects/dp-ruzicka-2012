@@ -18,7 +18,7 @@
 
 Označením Quantum GIS (dále QGIS) se většinou myslí aplikace QGIS Desktop, v následujícím textu tomu nebude jinak.
 
-QGIS je nejen prohlížečka geografických dat dostupná pro řadu platforem jako MS Windows, GNU/Linux, či Mac OS X, ale díky zásuvných modulů také velmi mocný nástroj pro práci s geografickými daty. QGIS podporuje díky knihovně \index{OGR}OGR většinu vektorových formátů dat jako například ESRI Shapefile, GRASS, MapInfo či GML a díky knihovně \index{GDAL} GDAL mnoho rastrových formátů jako TIFF, ArcInfo, GRASS raster, ERDAS a další. Přes QGIS můžeme také přistupovat k datům uložených v geodatabázích PostGIS a SpatiaLite či k datům dostupných přes WMS a WFS služby.\footnote{http://qgis.org/about-qgis/features.html} QGIS je šířen pod licencí GNU Public Licence.
+QGIS je nejen prohlížečka geografických dat dostupná pro řadu platforem jako MS Windows, GNU/Linux, či Mac OS X, ale díky zásuvným modulům také velmi mocný nástroj pro práci s geografickými daty. QGIS podporuje díky knihovně \index{OGR}OGR většinu vektorových formátů dat jako například ESRI Shapefile, GRASS, MapInfo či GML a díky knihovně \index{GDAL} GDAL mnoho rastrových formátů jako TIFF, ArcInfo, GRASS raster, ERDAS a další. Přes QGIS můžeme také přistupovat k datům uložených v geodatabázích PostGIS a SpatiaLite či k datům dostupných přes WMS a WFS služby.\footnote{http://qgis.org/about-qgis/features.html} QGIS je šířen pod licencí GNU Public Licence.
 
 Program je psán v jazyce C++. Poslední stabilní verze nese označení 1.7.4. QGIS je jednoduše rozšířitelná aplikace pomocí zásuvných modulů, tzv. pluginů. Pluginy mohou být psány v jazyce C++ nebo Python. QGIS má poměrně dobře zdokumentované API a nutno také podotknout, že komunita kolem QGIS je aktivní a podpora prostřednictvím mailing listů je na velmi vysoké úrovni.
 
@@ -39,7 +39,7 @@ V současnosti se na vývoji nejvíce podílí skupina vývojářů kolem organi
   	\label{pythonplugininstaller}
 \end{figure}
 
-QGIS umožňuje uživatelům rozšiřovat funkce programu dle jejich potřeb v podobě zásuvných modulů. Díky dobře zdokumentovanému API může uživatel pohodlně psát pluginy v jazyce C++ nebo Python. Pluginy píší jak vývojáři Quantum GISu, tak i obyčejní uživatelé. Pluginy si můžete stáhnout z oficiálních či neoficiálních repositářů. Pro instalování pluginů napsaných v jazyce Python a správu repositářů slouží nástroj \textbf{QGIS Python Plugin Installer}, dostupný přes \textit{Plugins $\rightarrow$ Fetch Python Plugins...}.
+QGIS umožňuje uživatelům rozšiřovat funkce programu dle jejich potřeb v podobě zásuvných modulů. Díky dobře zdokumentovanému API může uživatel pohodlně psát pluginy v jazyce C++ nebo Python. Pluginy píší jak vývojáři Quantum GISu, tak i obyčejní uživatelé. Pluginy si můžeme stáhnout z oficiálních či neoficiálních repositářů. Pro instalování pluginů napsaných v jazyce Python a správu repositářů slouží nástroj \textbf{QGIS Python Plugin Installer}, dostupný přes \textit{Plugins $\rightarrow$ Fetch Python Plugins...}.
 
 \noindent Jak je vidět z [\figurename \ref{pythonplugininstaller}], takto nainstalované pluginy se uloží do adresáře: 
 
@@ -72,7 +72,7 @@ Všechny nainstalované pluginy, ať psané v jazyce C++ či Python, může uži
 %% Psaní vlastního pluginu %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Psaní vlastního pluginu}
-Pluginy mohou být psány na jazyce C++ a Python. Již z charakteristiky daných jazyků vyplývá, že pro jednoduché, nenáročné či na začátku vývoje pluginy, se bude hodit spíše jazyk Python, který se nemusí kompilovat a píše se v něm rychleji než v jazyce C++. Pro rozsáhlejší projekty je lepší použít jazyk C++, protože obecně jsou programy psané v kompilovaných jazycích mnohem rychlejší než programy psané v jazycích interpretovaných. 
+Pluginy mohou být psány v jazyce C++ a Python. Již z charakteristiky daných jazyků vyplývá, že pro jednoduché, nenáročné či na začátku vývoje pluginu, se bude hodit spíše jazyk Python, který se nemusí kompilovat a píše se v něm rychleji než v jazyce C++. Pro rozsáhlejší projekty je lepší použít jazyk C++, protože obecně jsou programy psané v kompilovaných jazycích mnohem rychlejší než programy psané v jazycích interpretovaných. 
 
 %%%%%%%%%%%%
 %% Python %%
@@ -80,7 +80,7 @@ Pluginy mohou být psány na jazyce C++ a Python. Již z charakteristiky daných
 \subsection{Python plugin}
 \nocite{pyqgis:www}
 \index{PyQGIS}
-Chceme-li psát plugin v Pythonu, budeme k tomu potřebovat mít nainstalovaný \textbf{QGIS}, \textbf{Python} minimálně verze 2.5, \textbf{Qt} a její pythoní verzi \textbf{PyQt}. Při psaní pluginu v jazyce Python využíváme nástroje PyQGIS. Kromě dokumentace k QGIS API \cite{qgis_api:www} také doporučuji kuchařku, jak psát pomocí PyQGIS \cite{pyqgis:www}. Nejjednodušší možnost jak začít psát svůj plugin se jeví využít nástroj \textbf{Plugin Builder}. \textbf{Plugin Builder} je plugin, který vygeneruje základní soubory s kódem. Ty potom můžeme začít upravovat. \\
+Chceme-li psát plugin v Pythonu, budeme k tomu potřebovat mít nainstalovaný \textbf{QGIS}, \textbf{Python} minimálně verze 2.5, \textbf{Qt} a její pythoní verzi \textbf{PyQt}. Při psaní pluginu v jazyce Python využíváme nástroje PyQGIS. Kromě dokumentace k QGIS API \cite{qgis_api:www} také doporučuji kuchařku, kde nalezneme, jak psát pomocí PyQGIS \cite{pyqgis:www}. Nejjednodušší možnost jak začít psát svůj plugin se jeví využít nástroj \textbf{Plugin Builder}. \textbf{Plugin Builder} je plugin, který vygeneruje základní soubory s kódem. Ty potom můžeme začít upravovat. \\
 
 \noindent Základní soubory jsou:
 \begin{itemize}
@@ -88,9 +88,9 @@ Chceme-li psát plugin v Pythonu, budeme k tomu potřebovat mít nainstalovaný 
 	\item \textit{plugin.py} - hlavní soubor pluginu
 \end{itemize}
 
-Tyto dva výše zmíněné soubory jsou dostačující k tomu, aby se náš plugin objevil v \textbf{Plugin Manager}u. Dále budeme pravděpodobně potřebovat nějaké grafické rozhraní pro náš plugin. Daný soubor (.ui soubor) si můžeme vytvořit pomocí \textbf{Qt Designer}u a přeložit jej pomocí nástroje \index{pyuic4} \textbf{pyuic4} do souboru Pythonem dobře čitelného. Bude-li náš plugin obsahovat další soubory jako ikony, obrázky či zvuky, vytvoříme si soubor s příponou \textit{.qrc}. Soubor je .xml dokumentem a obsahuje relativní cesty k naším souborů. \textit{.qrc} soubor můžeme vytvořit ručně nebo pomocí \textbf{Qt Designer}u. Soubor poté opět přeložíme do souboru čitelného Pythonem pomocí \index{pyrcc4} \textbf{pyrcc4}.
+Tyto dva výše zmíněné soubory jsou dostačující k tomu, aby se náš plugin objevil v \textbf{Plugin Manager}u. Dále budeme potřebovat nějaké grafické rozhraní pro náš plugin. Daný soubor (.ui soubor) si můžeme vytvořit pomocí \textbf{Qt Designer}u a přeložit jej pomocí nástroje \index{pyuic4} \textbf{pyuic4} do souboru Pythonem dobře čitelného. Bude-li náš plugin obsahovat další soubory jako ikony, obrázky či zvuky, vytvoříme si soubor s příponou \textit{.qrc}. Soubor je .xml dokumentem a obsahuje relativní cesty k našim souborům. \textit{.qrc} soubor můžeme vytvořit ručně nebo pomocí \textbf{Qt Designer}u. Soubor poté opět přeložíme do souboru čitelného Pythonem pomocí \index{pyrcc4} \textbf{pyrcc4}.
 
-Pakliže napíšeme plugin, o kterém si myslíme, že by mohl být užitečný mohl by ho používat také někdo další, můžeme se pokusit jej nahrát do repositáře. Více informací [http://plugins.qgis.org/plugins/] a [http://plugins.qgis.org/]
+Pakliže napíšeme plugin, o kterém si myslíme, že by mohl být užitečný, že by ho mohl používat také někdo další, můžeme se pokusit jej nahrát do repositáře. Více informací [http://plugins.qgis.org/plugins/] a [http://plugins.qgis.org/]
 
 \subsubsection*{\textit{\_\_init\_\_.py}}
 Inicializační soubor, který slouží k získání informací o zásuvném modulu a jeho načtení. Soubor by měl obsahovat funkce $name$(), $description$(), $version$(), $qgisMinimumVersion$() a $authorName$(), které vrací textové řetězce udávající jméno, popis, verzi pluginu, minimální požadovanou verzi QGIS a jméno autora pluginu, a $classFactory$(\textit{iface}).
@@ -101,7 +101,6 @@ Od verze QGIS 2.0 pravděpodobně nebudou akceptována metadata z inicializačn�
 
 Ve verzi QGIS 1.9.90 mohou být pluginy zobrazovány nejen v menu \textit{Plugins}, ale mohou být rozděleny pomocí kategorií \textit{Raster}, \textit{Vector}, \textit{Database} a \textit{Web}. V inicializačním souboru tedy přibude funkce $category$(), která tuto informací vrací.
 
-\newpage
 Inicializační soubor může poté vypadat takto [\autoref{plugin:init}]. \\
 
 \begin{lstlisting}[caption={\_\_init\_\_.py - inicializační soubor},label=plugin:init]
@@ -129,10 +128,10 @@ def classFactory(iface):
 \end{lstlisting}
 
 \subsubsection*{\textit{plugin.py}}
-V souboru \textit{plugin.py} se nachází hlavní třída reprezentující náš plugin. Ta musí obsahovat metody \textit{\_\_init\_\_}, initGUI a unload. Metoda \textit{\_\_init\_\_} slouží mimo jiné k uchovávání odkazu na \textbf{QgisInterface}. Metoda \textit{initGUI} inicializuje plugin. Inicializace, i když název k tomu svádí, nemusí být spojena GUI. Metoda \textit{unload}, jak název napovídá, se stará o akce po deaktivaci pluginu. 
+V souboru \textit{plugin.py} se nachází hlavní třída reprezentující náš plugin. Ta musí obsahovat metody \textit{\_\_init\_\_}, initGUI a unload. Metoda \textit{\_\_init\_\_} slouží mimo jiné k uchovávání odkazu na \textbf{QgisInterface}. Metoda \textit{initGUI} inicializuje plugin. Inicializace, i když název k tomu svádí, nemusí být spojena s GUI. Metoda \textit{unload}, jak název napovídá, se stará o akce po deaktivaci pluginu. 
 
 \newpage
-Soubor se zásuvným modulem korespondující i předchozím inicializačním souborem [\autoref{plugin:init}] by mohl vypadat takto [\autoref{plugin:plugin}]. \\
+Soubor se zásuvným modulem korespondující s předchozím inicializačním souborem [\autoref{plugin:init}] by mohl vypadat takto [\autoref{plugin:plugin}]. \\
 
 \begin{lstlisting}[caption={plugin.py - plugin},label=plugin:plugin]
 class Plugin:
