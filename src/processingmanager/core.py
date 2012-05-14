@@ -32,6 +32,7 @@ class Graph(QObject):
         self.modules = {}
         self.connections = {}
         self.subgraphs = {}
+        self.path = None
 
     def loopError(self, msg = "loop"):
         self.emit(SIGNAL("graph"), "loop")
@@ -385,6 +386,7 @@ class Module(object):
         self._isIn = False
         self.mark = False
         self.loop = False
+        self.gmodule = None
 
     def setIsIn(self, bool):
         self._isIn = bool
@@ -527,6 +529,8 @@ class Module(object):
         modXML = Document().createElement("Module")
         modXML.setAttribute("name", "{0}".format(self.label))
         modXML.setAttribute("id", "{0}".format(self.id))
+        modXML.setAttribute("x", "{0}".format(self.gmodule.x()))
+        modXML.setAttribute("y", "{0}".format(self.gmodule.y()))
         modXML.appendChild( Document().createTextNode("{0}".format(self.description)) )
         for tag in self.tags:
             t = Document().createElement("tag")
@@ -704,6 +708,7 @@ class Port(object):
         portXML.setAttribute("value", "{0}".format(self._value))
         portXML.setAttribute("moduleID", "{0}".format(self.moduleId))
         portXML.setAttribute("connected", "{0}".format(self.isConnected()))
+#        portXML.setAttribute("setIt", "{0}".format(self.setIt))
         if self.type is processing.parameters.ChoiceParameter:
             portXML.setAttribute("choices", "{0}".format(self._data) )
         try:

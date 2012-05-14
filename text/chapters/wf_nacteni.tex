@@ -3,3 +3,5 @@
 Pro načtení byl napsán nový QGIS plugin \textbf{Workflow for Processing Framework Manager}, který načítá xml soubory z \$$HOME/.qgis/python/workflows$ adresáře. Na jejich základě vytvoří nové moduly, potomky processing.Module, a ty registruje v QGIS Processing Frametorku. Pro jednoduchou práci s daty uloženými v xml formátu se opět používá modul pythoní xml.dom.minidom.
 
 Plugin načte a registruje nové moduly, když je on sám načten do QGISu. Podobně to platí i u Processing Manageru, který načte registrované moduly, když je poprvé spuštěn. Z toho plyne, že když uložíme nový modul, soubor se sice uloží, ale plugin ho hned automaticky nenačte. Aby se nový modul automaticky objevil v Processing Manageru, deaktivují se pluginy \textbf{Workflow for Processing Framework Manager} a \textbf{QGIS Processing Framework} a znovu se načtou. Poté opět otevřeme Processing Manager. Toto řešení je však kostrbaté.
+
+Výsledný nový modul můžeme znovuotevřít a editovat. Klikneme na modul pravým tlačítkem myši a vybereme možnost \textit{Edit Module}.

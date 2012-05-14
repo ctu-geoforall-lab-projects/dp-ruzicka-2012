@@ -285,7 +285,7 @@ class DiagramScene(QGraphicsScene):
         self.graph = Graph()
 
     # VisTrails
-    def addModule(self, mod, position = QPointF(100, 100), moduleBrush=None):
+    def addModule(self, mod, position = QPointF(100, 100), moduleBrush=None,  edit = False):
         """
         module: Module
         position: QPointF
@@ -293,39 +293,42 @@ class DiagramScene(QGraphicsScene):
         -> QGraphicsModuleItem
         Add a module to the scene
         """
-        # first ve create Module and after that, we create QGraphicsModuleItem
-        ports = mod.parameters()
-        # create workflow builder module
-        module = Module()
-        # now we add Module to Graph (Graph is store in WorkflowBuilder)
-        self.parent().graph.addModule(module)
-        module.label = mod.name()
-        module.description = mod.description()
-        for tag in list(mod.tags()):
-            module.tags.append(tag)
-        module.tags = list( mod.tags() )
+        if edit:
+            module = edit
+        else:
+            # first ve create Module and after that, we create QGraphicsModuleItem
+            ports = mod.parameters()
+            # create workflow builder module
+            module = Module()
+            # now we add Module to Graph (Graph is store in WorkflowBuilder)
+            self.parent().graph.addModule(module)
+            module.label = mod.name()
+            module.description = mod.description()
+            for tag in list(mod.tags()):
+                module.tags.append(tag)
+            module.tags = list( mod.tags() )
 
-        # add Ports into Module
-        for i in ports:
-            if (i.role() == processing.parameters.Parameter.Role.input ):
-                PType = PortType.Destination
-            elif (i.role() == processing.parameters.Parameter.Role.output ):
-                PType = PortType.Source
-            else:
-                pass
-
-            tmpPort = None
-            if i.isMandatory():
-                tmpPort = Port(i.defaultValue(), PType, i.__class__,  module.id, i.name())
-            else:
-                tmpPort = Port(i.defaultValue(), PType, i.__class__,  module.id, i.name(), True)
-            if i.__class__ == ChoiceParameter:
-                tmpPort.setData(i.choices())
-            tmpPort.description = i.description()
-            tmpPort.parameterInstance = i
-
-            module.addPort(tmpPort)
-
+            # add Ports into Module
+            for i in ports:
+                if (i.role() == processing.parameters.Parameter.Role.input ):
+                    PType = PortType.Destination
+                elif (i.role() == processing.parameters.Parameter.Role.output ):
+                    PType = PortType.Source
+                else:
+                    pass
+    
+                tmpPort = None
+                if i.isMandatory():
+                    tmpPort = Port(i.defaultValue(), PType, i.__class__,  module.id, i.name())
+                else:
+                    tmpPort = Port(i.defaultValue(), PType, i.__class__,  module.id, i.name(), True)
+                if i.__class__ == ChoiceParameter:
+                    tmpPort.setData(i.choices())
+                tmpPort.description = i.description()
+                tmpPort.parameterInstance = i
+    
+                module.addPort(tmpPort)
+    
         # create QGraphicsModuleItem
         moduleItem = QGraphicsModuleItem(None)
         moduleItem.setupModule(module)
@@ -812,6 +815,7 @@ class QGraphicsModuleItem(QGraphicsItem):
         self.id = module.id
         self.setZValue(0)
         self.module = module
+        module.gmodule = self
         self.center = copy.copy(module.center)
 
         self.label = module.label
@@ -1148,6 +1152,7 @@ class QModuleTreeView(QTreeView):
     """
     def __init__(self, parent=None):
         super(QModuleTreeView, self).__init__(parent)
+        self.parent = parent
 
     def mouseMoveEvent(self, event):
         '''
@@ -1171,3 +1176,46 @@ class QModuleTreeView(QTreeView):
 
         drag.start(Qt.MoveAction)
 
+    def mouseReleaseEvent(self, event):
+        if not event.button() == Qt.RightButton:
+            return
+
+        index = self.indexAt(event.pos())
+        if not index.isValid():
+            return
+            
+        self.mod = index.data(Qt.UserRole+1).toPyObject()
+
+        from workflow_builder import workflow_builder        
+        if isinstance(self.mod, workflow_builder.Module):
+            menu = QMenu()            
+            editModule = QAction(QString("Edit Module"), self)
+            editModule.triggered.connect(self.openBuilder)
+            menu.addAction(editModule)
+            menu.exec_(self.mapToGlobal(event.pos()))
+
+    def openBuilder(self):
+        """
+            First we open Workflow Builder and clean the scene. After that 
+            we add all modules and connections from graph to scene.
+        """
+        from processingmanager.workflowBuilder import WorkflowBuilder
+        builder = self.parent.parent()._iface.mainWindow().findChild(WorkflowBuilder)
+        try:
+            builder.show()
+        except:
+            builder = WorkflowBuilder(self.parent.parent()._iface)
+            builder.show()
+        builder._onClearButtonClicked()        
+        builder.graph = self.mod.graph
+        builder.setWindowTitle(QString("{0}".format(builder.graph.name)))
+        for mm in builder.graph.modules.values():
+            # add module to the scene
+            inst = mm.getInstancePF()
+            mPF = inst.module()
+            builder.scene.addModule(mPF, mm.center, None, mm)
+            
+        for cc in builder.graph.connections.values():
+            # add connection to the scene
+            builder.scene.addConnection(cc)
+        

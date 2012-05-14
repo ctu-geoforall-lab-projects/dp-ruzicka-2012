@@ -29,6 +29,7 @@ from processingmanager.processing.parameters import *
 from processingmanager import core
 
 from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 from osgeo import gdal, ogr
 from gdalconst import *
@@ -49,10 +50,10 @@ class Plugin:
         dir.setNameFilters(QStringList( ["*.xml"] ) )
         for f in dir.entryInfoList():
             # take file, make Module
-            try:
-                tmpMods.append( Module(f.absoluteFilePath()) )
-            except:
-                print "I can't read this file: {0}".format(f.absoluteFilePath())
+#            try:
+            tmpMods.append( Module(f.absoluteFilePath()) )
+#            except:
+#                print "I can't read this file: {0}".format(f.absoluteFilePath())
         currentModules = map(lambda mod: mod.name(),list(processing.framework.modules()))
         for mod in tmpMods:
             if mod.name() not in currentModules:
@@ -71,6 +72,7 @@ class Module(processing.Module):
         graphDOM = fileXML.getElementsByTagName("Graph")[0] # should be just one
         self.graph = core.Graph()
         self.graph.name = str( graphDOM.getAttribute("name") )
+        self.graph.path = str( graphDOM.getAttribute("name") )
         self.graph.description = str( graphDOM.childNodes[0].nodeValue )
         tags = ["workflow"]
         # looking if there are defined some tags
@@ -99,14 +101,19 @@ class Module(processing.Module):
                 mod.id = int( modDOM.getAttribute("id") )
                 self.graph.addModule(mod)
                 mod.description = modDOM.childNodes[0].nodeValue
+                if modDOM.hasAttribute("x"):
+                    x = float( modDOM.getAttribute("x") )
+                    y = float( modDOM.getAttribute("y") )
+                    mod.center = QPoint(x, y)
                 for portDOM in modDOM.getElementsByTagName("Port"):
                     port = core.Port( dValue = portDOM.getAttribute("default_value"),  portType=int( portDOM.getAttribute("porttype") ), type = portDOM.getAttribute("type"),
                                      moduleId = int( portDOM.getAttribute("moduleID") ),  name = portDOM.getAttribute("name"),  optional = self.returnBoolean( portDOM.getAttribute("optional") ) )
 
-                    port.shouldBeSet = self.returnBoolean( portDOM.getAttribute("should_be_set") )
+                    port.setIt = self.returnBoolean( portDOM.getAttribute("should_be_set") )
                     port.connected = self.returnBoolean( portDOM.getAttribute("connected") )
                     port.setEmpty(port.connected == False)
                     port.id = int( portDOM.getAttribute("id") )
+                    #port.setIt = bool( portDOM.getAttribute("setIt") )
                     if portDOM.hasAttribute("alternative_name"):
                         port.alternativeName = str( portDOM.getAttribute("alternative_name") )
                     type = portDOM.getAttribute("type")
@@ -136,7 +143,7 @@ class Module(processing.Module):
                     port.setValue( str( portDOM.getAttribute("value") ) )
                     port.defaultValue = port.getValue()
                     # if port is input layer or should be set, create Parameter of PFModule
-                    if ( port.type in [VectorLayerParameter, RasterLayerParameter] or port.shouldBeSet ):
+                    if ( port.type in [VectorLayerParameter, RasterLayerParameter] or port.setIt ):
                         if port.connected:
                             pass
                         else:
