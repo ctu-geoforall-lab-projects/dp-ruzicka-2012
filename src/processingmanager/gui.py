@@ -173,6 +173,19 @@ class SaveDialog(QDialog,  Ui_savedialog):
         QObject.connect(self.buttonBox, SIGNAL("accepted()"), self.saveWorkflow)
 
     def prepareDialog(self):
+        if self.graph.description:
+            self.description.setPlainText(self.graph.description)
+            
+        self.lineEditName.setText(self.graph.name)
+        
+        if len(self.graph.tags):
+            tmpTags = ""
+            for tag in self.graph.tags[:-1]:
+                tmpTags += tag + ", "
+            tmpTags += self.graph.tags[-1]
+        
+            self.lineEditTags.setText(tmpTags)
+        
         for sub in self.graph.subgraphs.values():
             for mod in sub.getModules():
                 label = QLabel( QString("{0}".format(mod.label)) )

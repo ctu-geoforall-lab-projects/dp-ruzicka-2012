@@ -134,13 +134,13 @@ class WorkflowBuilder(QDialog, Ui_workflowBuilder):
         self.createGraph()
         if not self.graph.findLoop():
             if self.graph:
-                if self.graph.path:
-                    self.graph.save()
-                    reloadPlugin('workflow_builder')
-                    reloadPlugin('processingmanager')
-                else:
-                    svDialog = SaveDialog(self.graph, self)
-                    svDialog.show()
+                #if self.graph.path:
+                #    self.graph.save()
+                #    reloadPlugin('workflow_builder')
+                #    reloadPlugin('processingmanager')
+                #else:
+                svDialog = SaveDialog(self.graph, self)
+                svDialog.show()
 
     def _onClearButtonClicked(self):
         """
