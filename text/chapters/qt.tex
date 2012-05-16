@@ -71,7 +71,7 @@ Marie je také potomek třídy \textbf{QObject} a nachází se kdekoliv. Marie m
 %%% Model/View Programming %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Model-View architektura}
-Při seznamování s projektem QGIS Processing Framework a po komunikaci s Camilo Polymeris (student, který začal psát QGIS Processing Framework), jsem začal s přepsáním Processing Manageru (panelu s moduly) z QTreeWidget do MVC architektury. Standardní MVC architektura dělí aplikaci do tří částí, které jsou na sobě co nejméně závislé. Jsou to Model, View a Controller. Oddělení dat od aplikační a prezentační logiky dělá kód přehlednější a lépe udržitelným. Velkou výhodou také je, že jeden model se může zobrazit v několika různých pohledech vždy jiným způsobem.
+Při seznamování s projektem QGIS Processing Framework a po komunikaci s Camilo Polymeris (student, který začal psát QGIS Processing Framework v rámci programu Google Summer of Code 2011), jsem začal s přepsáním Processing Manageru (panelu s moduly) z QTreeWidget do MVC architektury. Standardní MVC architektura dělí aplikaci do tří částí, které jsou na sobě co nejméně závislé. Jsou to Model, View a Controller. Oddělení dat od aplikační a prezentační logiky dělá kód přehlednější a lépe udržitelným. Velkou výhodou také je, že jeden model se může zobrazit v několika různých pohledech vždy jiným způsobem.
 
 \begin{figure}[h]
 	\centering
@@ -92,21 +92,22 @@ V Qt se implementace MVC architektury objevila s verzí Qt4 v podobě model-view
 	\centering
 	\includegraphics[scale=0.7]{pictures/qt/mv}
 	\caption{model-view architektura v Qt4}
+        % zdroj ?
 	\label{mvc}
 \end{figure}
 
 \begin{itemize}
 	\item{\textbf{Model}} - tady se nic nemění oproti standardní MVC architektuře; komunikuje se zdrojem dat a poskytuje API pro ostatní komponenty architektury ($view$ a $delegate$)
 	\item{\textbf{View}} - zobrazuje data a navíc nabízí základní nástroje pro jejich editaci
-	\item{\textbf{Delegate}} - delegát můžeme definovat vlastní widgety sloužící k editaci dat z Modelu; může také definovat, jak se budou jaká data zobrazovat
+	\item{\textbf{Delegate}} - delegát můžeme definovat vlastní widgety sloužící k editaci dat z~Modelu; může také definovat, jak se budou jaká data zobrazovat
 \end{itemize}
 
 Komunikace mezi jednotlivými komponentami probíhá pomocí signálů a slotů. Qt pro každý prvek architektury ($model$, $view$ a $delegate$) poskytuje základní čistě abstraktní třídy plus několik dalších tříd již přímo použitelných implementací. Například pro data z tabulky můžeme přímo využít \textbf{QTableModel} a \textbf{QTableView}. Pakliže nám žádná z tříd nevyhovuje, můžeme samozřejmě reimplementovat třídy již existující.
 
 \subsubsection*{Model}
-Každý model je založený na abstraktní třídě \textbf{QAbstractItemModel}. Pakliže budeme chtít zobrazovat data jako seznam či v tabulce, můžeme se poohlédnout po dalších abstraktních třídách \textbf{QAbstractListModel}, resp. \textbf{QAbstractTableModel} implementující další prvky, které jsou pro daný model typické. Už z názvu je zřejmé, že žádná z těchto tříd nemůže být použita přímo. Mohou nám posloužit k napsání svých vlastních modelů. Také se můžeme pokusit vybrat si z několika základních modelů, které jsou připraveny k přímému použití. Mezi tyto modely patří například \textbf{QStringListModel} pro seznamy řetězců a \textbf{QStandardModel} pro složitější data. Dále existují typy určené pro přístup do databází \textbf{QSqlQueryModel}, \textbf{QSqlTableModel} a \textbf{QSqlRelationalTableModel} či \textbf{QFileSystemModel}, který poskytuje informace o souborech a složkách na vašem lokálním souborovém systému. Máme tedy několik předpřipravených modelů. Nebudou-li nám plně vyhovovat, můžeme si kteroukoliv třídu vybrat a reimplementovat ji.
+Každý model je založený na abstraktní třídě \textbf{QAbstractItemModel}. Pakliže budeme chtít zobrazovat data jako seznam či v tabulce, můžeme se poohlédnout po dalších abstraktních třídách \textbf{QAbstractListModel}, resp. \textbf{QAbstractTableModel} implementující další prvky, které jsou pro daný model typické. Už z názvu je zřejmé, že žádná z těchto tříd nemůže být použita přímo. Mohou nám posloužit k napsání svých vlastních modelů. Také se můžeme pokusit vybrat si z několika základních modelů, které jsou připraveny k přímému použití. Mezi tyto modely patří například \textbf{QStringListModel} pro seznamy řetězců a \textbf{QStandardModel} pro složitější data. Dále existují typy určené pro přístup do databází \textbf{QSqlQueryModel}, \textbf{QSqlTableModel} a \textbf{QSqlRelationalTableModel} či \textbf{QFileSystemModel}, který poskytuje informace o souborech a složkách ve vašem lokálním souborovém systému. Máme tedy několik předpřipravených modelů. Nebudou-li nám plně vyhovovat, můžeme si kteroukoliv třídu vybrat a reimplementovat ji.
 
-Dále existují tzv. proxy modely, které stojí mezi view a "standardním" modelem a poskytují podporu pro zpracování dat.  Například \textbf{QSortFilterProxyModel}, který umožňuje uživateli vytvořit pravidla pro řazení a filtraci dat.
+Dále existují tzv. proxy modely, které stojí mezi view a "standardním"~modelem a poskytují podporu pro zpracování dat.  Například \textbf{QSortFilterProxyModel}, který umožňuje uživateli vytvořit pravidla pro řazení a filtraci dat.
 
 View a Delegate získávají a manipulují s daty uloženými v modelech pomocí indexů třídy \textbf{QModuleIndex} a rolí. Index nám udává pozici v modelu pomocí rodiče, řádku a sloupce. V indexu mohou být uložena různá data pomocí různých rolí.
 
@@ -114,7 +115,7 @@ View a Delegate získávají a manipulují s daty uloženými v modelech pomocí
 	\centering
 	\begin{tabular}{|c|c|}
 		\hline	
-		metoda & popis \\
+		{\bf metoda} & {\bf popis} \\
 		\hline
 		\hline
 		child(int row, int column) & vrací potomka na dané pozici QModelIndex \\
@@ -133,24 +134,25 @@ View a Delegate získávají a manipulují s daty uloženými v modelech pomocí
 	\label{tab:qmodelindex}
 \end{table}
 
-\textit{Role} je celé číslo, na základě kterého můžeme zjistit "roli" dat. Existuje několik základních rolí jako $DisplayRole$(0), $ToolTipRole$(3) či $UserRole$(32). Samozřejmě si můžeme v podstatě zvolit jakékoliv celé číslo. Zde se s oblibou využívá $UserRole$, která reprezentuje nejvyšší číslo z předdefinovaných rolí (například $UserRole$ + celé číslo). Z QModelIndex dostaneme data pomocí metody $data(role)$.
+\textit{Role} je celé číslo, na základě kterého můžeme zjistit "roli"~dat. Existuje několik základních rolí jako $DisplayRole$(0), $ToolTipRole$(3) či $UserRole$(32). Samozřejmě si můžeme v podstatě zvolit jakékoliv celé číslo. Zde se s oblibou využívá $UserRole$, která reprezentuje nejvyšší číslo z předdefinovaných rolí (například $UserRole$ + celé číslo). Z QModelIndex dostaneme data pomocí metody $data(role)$.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.7]{pictures/qt/mv_models}
 	\caption{modely v model-view architektuře a jejich pozicování}
+        % zdroj ?
 	\label{mvModels}
 \end{figure} 
 
 
 Obecně se data do modelu ukládají pomocí metody $setData$(QModelIndex index, QVariant value, int role). Z objektu QVariant můžeme dostat naše data voláním metod jako $toInt()$, $toString()$, $toRect()$... případně $toPyObject()$ [\autoref{qstandarditem}]. 
 
-
 \begin{table}[h]	
 	\centering
+{\small
 	\begin{tabular}{|c|c|}
 		\hline	
-		metoda & popis \\
+		{\bf metoda} & {\bf popis} \\
 		\hline
 		\hline
 		data(QModelIndex index, int role) & vrací data v podobě QVariant \\
@@ -166,11 +168,12 @@ Obecně se data do modelu ukládají pomocí metody $setData$(QModelIndex index,
 
 
 	\end{tabular}
+}
 	\caption{některé metody třídy QAbstractItemModel}
 	\label{tab:qabsmodel}
 \end{table}
 
-U modelu \textbf{QStandardItemModel} se může k položkám v modelu přistupovat také jako \textbf{QStandardItem}. Data se do modelu ukládají jako \textbf{QStandardItem()} objekt. Pro uložení informací do objektu \textbf{QStandardItem} se používá metoda $setData$(QVariant \textit{data}, int \textit{role}). Pakliže nastavíme data pouze pomocí $setData$(\textit{data}), role se nastaví na $UserRole + 1$. Data potom dostaneme z \textbf{QStandardItem} pomocí metody $data(role)$. Model s QStandardItemModel s QStandardItem se hodí pro hierarchicky uspořádaná data. Ukázka použití QStandardItem viz [\autoref{qstandarditem}]. \\
+U modelu \textbf{QStandardItemModel} se může k položkám v modelu přistupovat také jako \textbf{QStandardItem}. Data se do modelu ukládají jako \textbf{QStandardItem()} objekt. Pro uložení informací do objektu \textbf{QStandardItem} se používá metoda $setData$(\newline QVariant \textit{data}, int \textit{role}). Pakliže nastavíme data pouze pomocí $setData$(\textit{data}), role se nastaví na $UserRole + 1$. Data potom dostaneme z \textbf{QStandardItem} pomocí metody $data(role)$. Model s QStandardItemModel s QStandardItem se hodí pro hierarchicky uspořádaná data. Ukázka použití QStandardItem viz [\autoref{qstandarditem}]. \\
 
 \begin{lstlisting}[label=qstandarditem,caption={QStandardItem - vytvoření a získání dat}, morekeywords={PyQt4, QtCore, QtGui, QStandardItem, Qt, Qt.UserRole, Qt.DisplayRole}]
 	from PyQt4.QtCore import Qt
@@ -258,7 +261,7 @@ class Delegate(QItemDelegate):
         model.setData(index,QVariant(editor.age()), Qt.UserRole+4)
 \end{lstlisting}
 
-Použití QStandardItemModel s QTreeView za použití proxy modelu a delegáta z ukázek \ref{qdelegate:paint} a \ref{qdelegate:createEditor} můžeme dostat výsledek podobný tomuto:
+Použití QStandardItemModel s QTreeView za použití proxy modelu a delegáta z~ukázek \ref{qdelegate:paint} a \ref{qdelegate:createEditor} můžeme dostat výsledek podobný tomuto:
 
 \begin{figure}[h]
 	\centering
@@ -315,7 +318,7 @@ Obecně se do scény prvky přidávají pomocí metody $addItem$(QGraphicsItem i
 \subsubsection*{QGraphicsView}
 U QGraphicsView nastavíme scénu pomocí $setScene$(). Dále můžeme nastavit možnost přibližování a oddalování, měřítko, barvu pozadí, vyhlazování hran u prvků, můžeme rotovat scénu atp.
 
-Na obrázku Obr. \ref{gsf} je vidět jedna scéna zobrazena ve dvou rozdílných pohledech. Změna scény provedená v jednom pohledu se projeví také v druhém pohledu. U pohledu vpravo byla nastavena barva pozadí pomocí metody $setBackgroundBrush$(QBrush brush), změněno měřítko os pomocí $scale$(int x, int y) a scéna byla otočena o 45$^\circ$ pomocí $rotate$(int angle). \\
+Na obrázku \ref{gsf} je vidět jedna scéna zobrazena ve dvou rozdílných pohledech. Změna scény provedená v jednom pohledu se projeví také v druhém pohledu. U pohledu vpravo byla nastavena barva pozadí pomocí metody $setBackgroundBrush$(QBrush brush), změněno měřítko os pomocí $scale$(int x, int y) a scéna byla otočena o 45$^\circ$ pomocí $rotate$(int angle). \\
 
 \begin{figure}[h]
 	\centering
@@ -330,7 +333,7 @@ Při tvorbě vlastního pohledu můžeme reimplementovat metody pro správu Drag
 
 VisTrails je systém pro správu workflow diagramů vyvíjený na University of Utah. Je napsán v Pythonu za pomoci knihovny PyQt. Systém je open source a uvolněný pod licencí GPL v2. 
 
-Na začátku práce na Workflow Builderu se nabízela možnost využít některých svobodných projektů pro modelování workflow diagramů. Vzhledem k tomu, že QGIS využívá knihovnu Qt a QGIS Processing framework samotný je psaný  v Pythonu, naskýtali se jako možnosti inspirace projekty Orange či \footnotemark{\index{VisTrails} VisTrails}\footnotetext{http://www.vistrails.org/index.php/Main\_Page}.
+Na začátku práce na Workflow Builderu se nabízela možnost využít některých svobodných projektů pro modelování workflow diagramů. Vzhledem k tomu, že QGIS využívá knihovnu Qt a QGIS Processing framework samotný je psaný  v Pythonu, naskýtali se jako možnosti inspirace projekty Orange či \footnotemark{\index{VisTrails} VisTrails}\footnotetext{\url{http://www.vistrails.org/index.php/Main\_Page}}.
 
 Nejvíce mě oslovilo grafické zpracování VisTrails [viz Obr. \ref{vt}]. Uživatel na první pohled vidí, jaký parametr je s kterým spojen. Ne pouze který modul je s kterým spojen jak to často bývá u podobných programů. Studoval jsem kód a využil jsem prvky scény \textbf{QGraphicsModule} reprezentující modul, \textbf{QGraphicsPort} reprezentující vstupní a výstupní parametry modulu a \textbf{QGraphicsConnection}, reimplementace třídy QGraphicsPathItem a  reprezentující spojení mezi parametry. Dále jsem se inspiroval postranním panelem, který zobrazuje informace o právě vybraném modulu a umožňuje také nastavování parametrů.
 

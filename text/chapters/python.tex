@@ -15,7 +15,9 @@ První verze jazyka byla uvolněna v roce 1991. Python navrhl Guido van Rossum, 
 
 % noveho v python3 http://docs.python.org/release/3.0.1/whatsnew/3.0.html
 
-V dnešní době se s Pythonem můžeme setkat téměř všude. Pro jeho jednoduchost při psaní kódu je velmi populární a široce rozšířený. Jeho velká výhoda je tedy velmi čitelný kód a rychlost psaní. Jazyk je jednoduše přenositelný (není nutná kompilace), je multiplatformní a má kvalitní dokumentaci. 
+V dnešní době se s Pythonem můžeme setkat téměř všude. Pro jeho jednoduchost při psaní kódu je velmi populární a široce rozšířený. Jeho velká výhoda je tedy velmi čitelný kód a rychlost psaní.
+% jazyk je prenositelny? zminka o "Compiled" Python files?
+Jazyk je jednoduše přenositelný (není nutná kompilace), je multiplatformní a má kvalitní dokumentaci. 
 
 V mnoha projektech existuje skriptovací rozhraní pro Python. Jako příklad uveďme QGIS, GIMP, Inkscape, Scribus, LibreOffice, Blender nebo ArcGIS. Můžeme jej najít v projektech jako Maya, OpenShot Video Editor, Wammu, DopBox, MapServer či Gajim. Používá se pro psaní grafického rozhraní. Existují verze grafických knihoven Qt a GTK pro Python - PyQt, resp. PyGTK. Využívá se jako skriptovací jazyk pro psaní webových aplikací. V síti Internet se s ním můžeme také setkat v podobě nástrojů jako Django, Zope či Pylons. Byly napsány knihovny pro vědecké výpočty - NumPy, SciPy, Matplotlib.
 
@@ -24,7 +26,7 @@ V mnoha projektech existuje skriptovací rozhraní pro Python. Jako příklad uv
 \subsection*{PyQGIS}
 Quantum GIS nabízí podporu QGIS API pro jazyk Python. Jedná se o verzi PyQGIS. PyQGIS můžeme používat přímo v QGISu přes příkazovou řádku, psát zásuvné moduly či využít QGIS API pro náš vlastní program. 
 
-Existuje velmi dobře zpracovaná tzv. kuchařka jak psát v PyQGIS \cite{pyqgis:www}, tudíž nepovažuji za nutné se mnoho rozepisovat. Zmíním jen pár informací, které považuji za základní. Rastrové a vektorové vrstvy jsou reprezentovány třídami \textit{QgsRasterLayer} a \textit{QgsVectorLayer}. Třída \textit{QgsMapLayerRegistry} slouží k načítání, správu a mazání geografických vrstev z QGISu. Třída se nachází v \textbf{qgis.core} knihovně. Pomocí příkazu \textbf{QgsMapLayer.instance().mapLayers()} získáme všechny vrstvy momentálně načtené v QGIS. Aktivní vrstvu získáme pomocí příkazu \textbf{qgis.utils.iface.activeLayer()}. Vrstvu přidáme do QGISu pomocí \textbf{QgsMapLayer.instance().addMapLayer(layer)} a odebereme \textbf{QgsMapLayer.instance().removeMapLayer(layer)}. 
+Existuje velmi dobře zpracovaná tzv. kuchařka jak psát v PyQGIS \cite{pyqgis:www}, tudíž nepovažuji za nutné se mnoho rozepisovat. Zmíním jen pár informací, které považuji za základní. Rastrové a vektorové vrstvy jsou reprezentovány třídami \textit{QgsRaster\-Layer} a \textit{QgsVectorLayer}. Třída \textit{QgsMapLayerRegistry} slouží k načítání, správu a mazání geografických vrstev z QGISu. Třída se nachází v \textbf{qgis.core} knihovně. Pomocí příkazu \textbf{QgsMapLayer.instance().mapLayers()} získáme všechny vrstvy momentálně načtené v QGIS. Aktivní vrstvu získáme pomocí příkazu \textbf{qgis.utils.iface.activeLayer()}. Vrstvu přidáme do QGISu pomocí \textbf{QgsMapLayer.instance().addMapLayer(layer)} a odebereme \textbf{QgsMapLayer.instance().removeMapLayer(layer)}. 
 
 Vektorovou vrstvu vytvoříme takto \textbf{QgsVectorLayer}(cesta\_k\_souboru, jmeno\_vrstvy, knihovna).
 

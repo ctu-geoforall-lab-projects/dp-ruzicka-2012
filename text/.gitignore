@@ -6,3 +6,4 @@
 *.out
 thesis.pdf
 *.toc
+*.run.xml
