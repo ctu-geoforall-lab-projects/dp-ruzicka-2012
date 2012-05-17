@@ -7,8 +7,8 @@ Module, a hrany představují spojení, která jsou
 třídy \textbf{Connection}. Do grafu se postupně přidávají moduly podle
 toho, jak uživatel pomocí myši přetahuje moduly z Processing
 Manageru. Objekt třídy Module se vytvoří na základě instance
-přetaženého modulu (název, popis, tagy a parametry). Modul z Workflow
-Builderu obsahuje parametry třídy \textbf{Port}. Instance třídy Port
+přetaženého modulu (název, popis, tagy a parametry). Modul z~Workflow
+Build\-eru obsahuje parametry třídy \textbf{Port}. Instance třídy Port
 se také vytváří automaticky a přiřazují se danému modulu. Grafická
 reprezentace Module je \textbf{QGraphicsModuleItem}, který také
 podle \textbf{Port}ů v Module vytvoří \textbf{QGraphicsPortItem}y. Při
@@ -29,7 +29,7 @@ parametr \figurename \ref{wf:crCon}.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{pictures/wf/wf_crCon}
+	\includegraphics[scale=0.4]{pictures/wf/wf_crCon}
 	\caption{Workflow Builder - tvorba spojení}
   	\label{wf:crCon}
 \end{figure}
@@ -40,7 +40,7 @@ tlačítko $Clear$ v pravé spodní části dialogového okna, které smaže
 všechny prvky ve scéně včetně modulů a spojení.
 
 V Graphu máme tedy uloženy moduly a spojení mezi nimi (Module a
-Connetion). Jsou uloženy jako slovníky, kde klíč je identifikační
+Connection). Jsou uloženy jako slovníky, kde klíč je identifikační
 číslo modulu, resp. spojení a hodnota je instance třídy Module,
 resp. Connection. Ty se během tvorby workflow mění podle toho, jak
 uživatel přidává a odebírá moduly, spojuje je a ruší spojení.
@@ -57,7 +57,7 @@ QGIS Processing Frameworku. \\
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.9]{pictures/wf/wf_inPar}
+	\includegraphics[scale=0.7]{pictures/wf/wf_inPar}
 	\caption{Workflow Builder - vstupní parametr}
   	\label{wf:inPar}
 \end{figure}
@@ -80,7 +80,7 @@ vygenerovaným názvem do QGIS. \\
 
 \begin{figure}[!]
 	\centering
-	\includegraphics[scale=1.0]{pictures/wf/wf_outPar}
+	\includegraphics[scale=0.7]{pictures/wf/wf_outPar}
 	\caption{Workflow Builder - výstupní parametr}
   	\label{wf:outPar}
 \end{figure}

@@ -10,7 +10,7 @@
 
 QGIS Processing Framework vznikl v rámci projektu \footnotemark{GSoC
 2011} \footnotetext{Google Summer of Code. Projekt společnosti Google
-na podporu studentu. více na http://code.google.com/soc/}. Student
+na podporu studentu, více na \url{http://code.google.com/soc/}}. Student
 Camilo Polymeris z univerzity Universidad de Concepción si kladl za
 cíl napsat obecný framework, do kterého budou zapadat všechny moduly
 všech pluginů QGISu a každý modul bude možné použít buď samostatně
@@ -19,7 +19,7 @@ nebo spojovat s jinými.
 V době psaní této práce byla na světě první verze Processing
 Frameworku a vše nasvědčovalo tomu, že práce na frameworku budou
 pokračovat a nástroje v Processing Frameworku budou
-přibývat. Existovala totiž pouze částečná podpora pro funkce z SAGA
+přibývat. Existovala totiž pouze částečná podpora pro funkce SAGA
 GIS a plugin zpřístupňující funkce \index{Orfeo Toolbox, OTB} Orfeo
 Toolboxu (OTB). Orfeo Toolbox je svobodný software poskytující
 nástroje pro zpracování snímku z \index{DPZ, dálkový průzkum Země}
@@ -48,7 +48,7 @@ název. Modul obsahuje dále popis, ale protože se tagy generují z
 tohoto popisu, není nutné popis procházet \figurename \ref{pf:pm}.
 
 Modul je reprezentován třídou \textbf{Module} a jeho instance
-třídou \textbf{ModuleInstace}. Z třídy \textbf{Module} získáváme
+třídou \textbf{ModuleInstace}. Z~třídy \textbf{Module} získáváme
 informace o modulu. Pomocí metody $name$() získáme jméno modulu,
 metoda $description$() vrací popis, metoda $tags$() a metoda
 $instance$() vrací instanci třídy \textbf{ModuleInstace} daného
@@ -58,7 +58,7 @@ daného modulu. Parametry jsou třídy \textbf{Parameter}.
 U \textbf{ModuleInstace} můžeme pomocí metody $setValue$(Parameter,
 hodnota) přiřazovat parametrům konkrétní hodnoty. Metodou
 $value$(Paramter) získáme hodnotu parametru. Pomocí metody
-$setState$() s parametrem "2" spouštíme daný modul. Metoda $module$()
+$setState$() s parametrem "2"\,spouštíme daný modul. Metoda $module$()
 vrací module (Module).
 
 Parametry jsou třídy \textbf{Parameter}. Uchovávají v sobě informaci o
@@ -70,7 +70,7 @@ třídy \textbf{Parameter} je zobrazen v [\tablename \ref{tab:metPar}].
 	\centering
 	\begin{tabular}{|c|c|}
 	\hline
-	metoda & popis \\
+	{\bf metoda} & {\bf popis} \\
 	\hline
 	\hline
 	name() & vrací jméno\\
@@ -186,9 +186,9 @@ Plugin pro QGIS Processing Framework se v mnohém neliší od normálních
 pluginů psaných pro QGIS. Inicializační soubor se prakticky vůbec
 neliší. Třída reprezentující samotný plugin obsahuje navíc
 metodu \textit{modules}(), která vrací seznam modulů třídy
-processing.\textbf{Module} (dále jen Module), který poskytuje daný
+processing. \textbf{Module} (dále jen Module), který poskytuje daný
 plugin. Plugin samotný se musí registrovat v frameworku. To se provede
-příkazem \begin{scriptsize}processing.framework.registerModuleProvider(self)\end{scriptsize},
+příkazem \begin{scriptsize}processing.framework.registerModule\-Provider(self)\end{scriptsize},
 který se vloží do metody \textit{initGUI}().
 
 Plugin tedy může obsahovat několik modulů, které vrací pomocí
@@ -199,7 +199,7 @@ která definuje typy parametry modulu, jeho název, popis a tagy. A
 vrací jeho instanci v podobě ModuleInstance, která slouží ke spouštění
 modulu s nastavenými parametry a spravuje, co se děje po provedení
 modulu. To znamená, že pakliže chceme spustit modul, musíme nastavit
-parametry a ty se nastavují v instanci, ne v modulu samotném. Modul
+parametry a ty se nastavují v instanci, ne v~modulu samotném. Modul
 poté spustíme metodou instance setStatus(2). Instance by mela
 obsahovat kód, který vstupní parametry zpracuje a poté také nastaví
 výstupní hodnoty.
@@ -247,10 +247,10 @@ jeden - rastr třídy QgsRasterMapLayer. Příklad je pouze ilustrativní.
 Inicializační soubor nebudu uvádět, protože se nijak neliší od toho,
 když píšeme normální plugin pro QGIS. Soubor se samotným pluginem bude
 obsahovat třídu Plugin, která reprezentuje náš plugin
-[\autoref{pf:plugin}]. Dále třídu RasterToQgis(processing.Module)
+[\autoref{pf:plugin}]. Dále třídu RasterToQgis(processing.\-Module)
 [\autoref{pf:rasterToQgis}] a třídu
 RasterToQgisInstance(processing.ModuleInstance)
-[\autoref{pf:rasterToQgisInstance}] .\\
+[\autoref{pf:rasterToQgisInstance}].\\
 
 \newpage
 \begin{lstlisting}[caption={Třída Plugin pro QGIS Processing Framework}, label=pf:plugin, morekeywords={Plugin, __init__, modules, initGUI, unload}]
@@ -287,7 +287,7 @@ class RasterToQgis(processing.Module):
         							self.inParamName,  self.outParam)
 \end{lstlisting}
 
-V příkladu [\autoref{pf:rasterToQgis}] jsme u parametrů jsem nastavili
+V příkladu [\autoref{pf:rasterToQgis}] jsme u parametrů nastavili
 pouze nejnutnější atributy jako název a roli. Role nám říká, zdali je
 parametr povinný či volitelný. U parametrů můžeme nastavit také popis
 či počáteční hodnotu při jejich tvorbě pomocí parametrů v

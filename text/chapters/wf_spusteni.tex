@@ -6,16 +6,16 @@ spustit celý proces (workflow), v grafu se vytvoří podgrafy. Ty jsou v
 podstatě souvislými komponentami grafu. Tvoří se rekurzivně tak, že se
 vytvoří podgraf třídy \textbf{SubGraph} a z prvotního seznamu všech
 modulů v grafu se vyjme jeden a vloží se do něj. Poté se hledají další
-moduly, které patří do stejné komponenty, do stejného podgrafu. Z
-původního seznamu všech modulů v grafu se vyjmou všechny moduly
-spojené s prvním modulem a uloží se do podgrafu, poté se z původního
-seznamu vyjmou moduly, které jsou spojené s předchozími moduly a tak
-dále dokud existují spojení. Zároveň se ukládají do podgrafu i spojení
-(instance třídy Connection). Pakliže již neexistuje další propojený
-modul a v původním seznamu ještě zůstali nějaké moduly, vytvoří se
-nový podgraf a postupuje se stejným způsobem jako u předchozího
-podgrafu. Jeli původní seznam modulů prázdný, znamená to, že všechny
-moduly z grafu jsou rozděleny do podgrafů.
+moduly, které patří do stejné komponenty, do stejného
+podgrafu. Z~původního seznamu všech modulů v grafu se vyjmou všechny
+moduly spojené s prvním modulem a uloží se do podgrafu, poté se z
+původního seznamu vyjmou moduly, které jsou spojené s předchozími
+moduly a tak dále dokud existují spojení. Zároveň se ukládají do
+podgrafu i spojení (instance třídy Connection). Pakliže již neexistuje
+další propojený modul a v původním seznamu ještě zůstali nějaké
+moduly, vytvoří se nový podgraf a postupuje se stejným způsobem jako u
+předchozího podgrafu. Jeli původní seznam modulů prázdný, znamená to,
+že všechny moduly z grafu jsou rozděleny do podgrafů.
 
 Jakmile máme vytvořeny podgrafy, zjistíme, zdali je pro nás graf,
 resp. všechny jeho podgrafy, validní. To znamená, že se prochází každý
