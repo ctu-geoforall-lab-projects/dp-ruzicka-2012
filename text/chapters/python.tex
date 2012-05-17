@@ -8,27 +8,65 @@
 	\includegraphics[scale=0.5]{pictures/python/logo.pdf}
 \end{center}
 
-Python je objektově orientovaný a interpretovaný programovací jazyk s dynamickým a silným typováním. Python je charakteristický pro své vyjadřování struktury kódu pomocí odsazování, jehož dodržování je povinné. To vede k čitelnějšímu a přehlednějšímu kódu. 
+Python je objektově orientovaný a interpretovaný programovací jazyk s
+dynamickým a silným typováním. Python je charakteristický pro své
+vyjadřování struktury kódu pomocí odsazování, jehož dodržování je
+povinné. To vede k čitelnějšímu a přehlednějšímu kódu.
 
-První verze jazyka byla uvolněna v roce 1991. Python navrhl Guido van Rossum, který byl inspirován jazyky jako C++ či Perl. Jedná se o \textbf{open source} projekt dostupný pod licencí Python Software Foundation License, která je kompatibilní s GPL licencí. Rozdíl je v tom, že u Python Software Foundation License můžeme měnit kód bez nutnosti zveřejnit změny jako open source [viz \footnote{http://docs.python.org/license.html}]. Aktuální stabilní verze jsou 2.7.3 a 3.2.3 pro verzi Python 3.0, která byla uvolněna v roce 2008. 
+První verze jazyka byla uvolněna v roce 1991. Python navrhl Guido van
+Rossum, který byl inspirován jazyky jako C++ či Perl. Jedná se
+o \textbf{open source} projekt dostupný pod licencí Python Software
+Foundation License, která je kompatibilní s GPL licencí. Rozdíl je v
+tom, že u Python Software Foundation License můžeme měnit kód bez
+nutnosti zveřejnit změny jako open source
+[viz \footnote{http://docs.python.org/license.html}]. Aktuální
+stabilní verze jsou 2.7.3 a 3.2.3 pro verzi Python 3.0, která byla
+uvolněna v roce 2008.
 
 
 % noveho v python3 http://docs.python.org/release/3.0.1/whatsnew/3.0.html
 
-V dnešní době se s Pythonem můžeme setkat téměř všude. Pro jeho jednoduchost při psaní kódu je velmi populární a široce rozšířený. Jeho velká výhoda je tedy velmi čitelný kód a rychlost psaní.
+V dnešní době se s Pythonem můžeme setkat téměř všude. Pro jeho
+jednoduchost při psaní kódu je velmi populární a široce
+rozšířený. Jeho velká výhoda je tedy velmi čitelný kód a rychlost
+psaní.
 % jazyk je prenositelny? zminka o "Compiled" Python files?
 Jazyk je jednoduše přenositelný (není nutná kompilace), je multiplatformní a má kvalitní dokumentaci. 
 
-V mnoha projektech existuje skriptovací rozhraní pro Python. Jako příklad uveďme QGIS, GIMP, Inkscape, Scribus, LibreOffice, Blender nebo ArcGIS. Můžeme jej najít v projektech jako Maya, OpenShot Video Editor, Wammu, DopBox, MapServer či Gajim. Používá se pro psaní grafického rozhraní. Existují verze grafických knihoven Qt a GTK pro Python - PyQt, resp. PyGTK. Využívá se jako skriptovací jazyk pro psaní webových aplikací. V síti Internet se s ním můžeme také setkat v podobě nástrojů jako Django, Zope či Pylons. Byly napsány knihovny pro vědecké výpočty - NumPy, SciPy, Matplotlib.
+V mnoha projektech existuje skriptovací rozhraní pro Python. Jako
+příklad uveďme QGIS, GIMP, Inkscape, Scribus, LibreOffice, Blender
+nebo ArcGIS. Můžeme jej najít v projektech jako Maya, OpenShot Video
+Editor, Wammu, DopBox, MapServer či Gajim. Používá se pro psaní
+grafického rozhraní. Existují verze grafických knihoven Qt a GTK pro
+Python - PyQt, resp. PyGTK. Využívá se jako skriptovací jazyk pro
+psaní webových aplikací. V síti Internet se s ním můžeme také setkat v
+podobě nástrojů jako Django, Zope či Pylons. Byly napsány knihovny pro
+vědecké výpočty - NumPy, SciPy, Matplotlib.
 
 %Řekl bych, že odinstalovat Python z Vašeho počítače nebude zrovna ten nejlepší nápad. Je totiž prakticky všude.
 
 \subsection*{PyQGIS}
-Quantum GIS nabízí podporu QGIS API pro jazyk Python. Jedná se o verzi PyQGIS. PyQGIS můžeme používat přímo v QGISu přes příkazovou řádku, psát zásuvné moduly či využít QGIS API pro náš vlastní program. 
+Quantum GIS nabízí podporu QGIS API pro jazyk Python. Jedná se o verzi
+PyQGIS. PyQGIS můžeme používat přímo v QGISu přes příkazovou řádku,
+psát zásuvné moduly či využít QGIS API pro náš vlastní program.
 
-Existuje velmi dobře zpracovaná tzv. kuchařka jak psát v PyQGIS \cite{pyqgis:www}, tudíž nepovažuji za nutné se mnoho rozepisovat. Zmíním jen pár informací, které považuji za základní. Rastrové a vektorové vrstvy jsou reprezentovány třídami \textit{QgsRaster\-Layer} a \textit{QgsVectorLayer}. Třída \textit{QgsMapLayerRegistry} slouží k načítání, správu a mazání geografických vrstev z QGISu. Třída se nachází v \textbf{qgis.core} knihovně. Pomocí příkazu \textbf{QgsMapLayer.instance().mapLayers()} získáme všechny vrstvy momentálně načtené v QGIS. Aktivní vrstvu získáme pomocí příkazu \textbf{qgis.utils.iface.activeLayer()}. Vrstvu přidáme do QGISu pomocí \textbf{QgsMapLayer.instance().addMapLayer(layer)} a odebereme \textbf{QgsMapLayer.instance().removeMapLayer(layer)}. 
+Existuje velmi dobře zpracovaná tzv. kuchařka jak psát v
+PyQGIS \cite{pyqgis:www}, tudíž nepovažuji za nutné se mnoho
+rozepisovat. Zmíním jen pár informací, které považuji za
+základní. Rastrové a vektorové vrstvy jsou reprezentovány
+třídami \textit{QgsRaster\-Layer}
+a \textit{QgsVectorLayer}. Třída \textit{QgsMapLayerRegistry} slouží k
+načítání, správu a mazání geografických vrstev z QGISu. Třída se
+nachází v \textbf{qgis.core} knihovně. Pomocí
+příkazu \textbf{QgsMapLayer.instance().mapLayers()} získáme všechny
+vrstvy momentálně načtené v QGIS. Aktivní vrstvu získáme pomocí
+příkazu \textbf{qgis.utils.iface.activeLayer()}. Vrstvu přidáme do
+QGISu pomocí \textbf{QgsMapLayer.instance().addMapLayer(layer)} a
+odebereme \textbf{QgsMapLayer.instance().removeMapLayer(layer)}.
 
-Vektorovou vrstvu vytvoříme takto \textbf{QgsVectorLayer}(cesta\_k\_souboru, jmeno\_vrstvy, knihovna).
+Vektorovou vrstvu vytvoříme
+takto \textbf{QgsVectorLayer}(cesta\_k\_souboru, jmeno\_vrstvy,
+knihovna).
 
 Například:
 
@@ -44,7 +82,9 @@ Například:
 	raster = QgsRasterLayer("~/geodata/elevation.tiff", "Elevation")
 \end{lstlisting}
 
-Z mapových vrstev můžeme získat například souřadnicový systém pomocí metody \textit{crs}(), zdrojový soubor metodou \textit{source}(), jménou \textit{name}() či rozsah \textit{exent}().\\
+Z mapových vrstev můžeme získat například souřadnicový systém pomocí
+metody \textit{crs}(), zdrojový soubor metodou \textit{source}(),
+jménou \textit{name}() či rozsah \textit{exent}().\\
 
 Kompletní dokumentace QGIS API je dostupná zde \cite{qgis_api:www}.
 %QGIS používá verzi 2.7.1.

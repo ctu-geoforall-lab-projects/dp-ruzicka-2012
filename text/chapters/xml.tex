@@ -4,28 +4,81 @@
 \nocite{python:www}
 \nocite{py3:book}
 
-Nově vzniklé workflow se ukládají do souboru využívajíce jazyk \index{XML} XML. Výhoda XML dokumentu je, že se s ním snadno pracuje a jde v podstatě pouze o textový dokument.
+Nově vzniklé workflow se ukládají do souboru využívajíce
+jazyk \index{XML} XML. Výhoda XML dokumentu je, že se s ním snadno
+pracuje a jde v podstatě pouze o textový dokument.
 
-XML nabízí jednoduché uložení hierarchicky strukturovaných dat. O prvcích XML dokumentu hovoříme jako o elementech. Elementy jsou ohraničeny počátečními a koncovými znaky, tzv. tagy. XML dokument obsahuje vždy právě jeden kořenový element, který se může skládat z dalších a dalších elementů. V příkladu XML dokumentu (\autoref{xml:example}]) je kořenový element $Graph$. Elementy mohou obsahovat atributy (dvojice jméno="hodnota").  Jména atributů se v rámci jednoho elementu nesmí opakovat. Elementy také mohou obsahovat text, který se uvádí mezi počátečním a koncovým znakem. \\
+XML nabízí jednoduché uložení hierarchicky strukturovaných dat. O
+prvcích XML dokumentu hovoříme jako o elementech. Elementy jsou
+ohraničeny počátečními a koncovými znaky, tzv. tagy. XML dokument
+obsahuje vždy právě jeden kořenový element, který se může skládat z
+dalších a dalších elementů. V příkladu XML dokumentu
+(\autoref{xml:example}]) je kořenový element $Graph$. Elementy mohou
+obsahovat atributy (dvojice jméno="hodnota").  Jména atributů se v
+rámci jednoho elementu nesmí opakovat. Elementy také mohou obsahovat
+text, který se uvádí mezi počátečním a koncovým znakem. \\
 
 \noindent Příklad XML dokumentu$:$ \\
 
 \lstinputlisting[language=XML,caption={Příklad XML dokumentu},morekeywords={Graph, SubGraph, Module, tag}, label=xml:example]{code/plugins/xml/example_xml.xml}
 
 % DOM level 2
-Pro práci s XML dokumenty se v prostředí jazyka Python nabízí několik modulů. Při psaní této práce byl vybrán \index{xml.dom} \textbf{xml.dom}, resp. jeho odlehčená verze \index{xml.dom.minidom} \textbf{xml.dom.minidom}, který k XML dokumentu přistupuje přes rozhraní DOM (Document Object Model). \index{DOM} \textbf{DOM}  je rozhraní pro přístup a práci s XML dokumenty. Je to zároveň standard organizace World Wide Web Consortium (W3C). W3C je organizace, která se zabývá standardy v prostředí Word Wide Web.
+Pro práci s XML dokumenty se v prostředí jazyka Python nabízí několik
+modulů. Při psaní této práce byl
+vybrán \index{xml.dom} \textbf{xml.dom}, resp. jeho odlehčená
+verze \index{xml.dom.minidom} \textbf{xml.dom.minidom}, který k XML
+dokumentu přistupuje přes rozhraní DOM (Document Object
+Model). \index{DOM} \textbf{DOM} je rozhraní pro přístup a práci s XML
+dokumenty. Je to zároveň standard organizace World Wide Web Consortium
+(W3C). W3C je organizace, která se zabývá standardy v prostředí Word
+Wide Web.
 
-Na začátku je potřeba si vytvořit objekt (\textit{Document}), který bude reprezentovat celý XML dokument. \textit{Document} je, stejně jako všechny ostatní elementy (objekty třídy Element) XML dokumentu, podtřídou třídy \textit{Node}. Do takto vytvořeného objektu se poté mohou přidávat další elementy. Třída \textbf{Document} obsahuje statickou metodu $createElement$(\textit{tagName}). Metodu můžeme tedy volat z třídy \textbf{Document} nebo z již existujícího objektu. To samé platí i v případě metody createTextNode(), která slouží k vytvoření textu, který se poté může vložit do elementu.
+Na začátku je potřeba si vytvořit objekt (\textit{Document}), který
+bude reprezentovat celý XML dokument. \textit{Document} je, stejně
+jako všechny ostatní elementy (objekty třídy Element) XML dokumentu,
+podtřídou třídy \textit{Node}. Do takto vytvořeného objektu se poté
+mohou přidávat další elementy. Třída \textbf{Document} obsahuje
+statickou metodu $createElement$(\textit{tagName}). Metodu můžeme tedy
+volat z třídy \textbf{Document} nebo z již existujícího objektu. To
+samé platí i v případě metody createTextNode(), která slouží k
+vytvoření textu, který se poté může vložit do elementu.
 
-Pro přidání elementu do jiného elementu použijeme metodu $appendChild$(\textit{newChild}) nebo $insertBefore$(\textit{newChild}, \textit{refChild}). Chceme-li nahradit jeden element druhým, použijeme metodu $replaceChild$(\textit{newChild}, \textit{oldChild}). Pro mazání elementu se používá metoda $removeChild$(\textit{oldChild}). K získání informace, zdali element obsahuje atributy, zavoláme metody $hasAttributes$(). Všechny tyto metody jsou metody třídy \textbf{Node}. Třídy jako \textbf{Document} či \textbf{Element}, stejně jako všechny ostatní prvky XML dokumentu, jsou podtřídami třídy \textbf{Node}, tudíž i ony dědí tyto metody.
+Pro přidání elementu do jiného elementu použijeme metodu
+$appendChild$(\textit{newChild}) nebo
+$insertBefore$(\textit{newChild}, \textit{refChild}). Chceme-li
+nahradit jeden element druhým, použijeme metodu
+$replaceChild$(\textit{newChild}, \textit{oldChild}). Pro mazání
+elementu se používá metoda $removeChild$(\textit{oldChild}). K získání
+informace, zdali element obsahuje atributy, zavoláme metody
+$hasAttributes$(). Všechny tyto metody jsou metody
+třídy \textbf{Node}. Třídy jako \textbf{Document} či \textbf{Element},
+stejně jako všechny ostatní prvky XML dokumentu, jsou podtřídami
+třídy \textbf{Node}, tudíž i ony dědí tyto metody.
 
-Atributy nastavíme u objektů třídy \textbf{Element} pomocí metody $setAttribute$(\textit{name}, \textit{value}). Metodou $hasAttribute$(\textit{name}) se dotazujeme, zdali daný element obsahuje atribut \textit{name}. Pomocí metody $getAttribute$(\textit{name}) získáme hodnotu atributu \textit{name}. A pomocí metody $removeAttribute$(name) smažeme atribut \textit{name}.
+Atributy nastavíme u objektů třídy \textbf{Element} pomocí metody
+$setAttribute$(\textit{name}, \textit{value}). Metodou
+$hasAttribute$(\textit{name}) se dotazujeme, zdali daný element
+obsahuje atribut \textit{name}. Pomocí metody
+$getAttribute$(\textit{name}) získáme hodnotu
+atributu \textit{name}. A pomocí metody $removeAttribute$(name)
+smažeme atribut \textit{name}.
 
-Metoda $getElementsByTagName$(\textit{tagName}) vrací seznam elementů korespondující s \textit{tagName} a potomky daného elementu nacházející se v daném elementu.
+Metoda $getElementsByTagName$(\textit{tagName}) vrací seznam elementů
+korespondující s \textit{tagName} a potomky daného elementu
+nacházející se v daném elementu.
 
-XML dokument uložíme do souboru zavoláním metody writexml(\textit{file}, \textit{indent}, \textit{addindent}, \textit{encoding}) dané instance třídy Document. \textit{File} je soubor připravený pro zápis, \textit{indent} udává odsazení na začátku nového elementu (například začátek nového řádku), \textit{addindent} udává přírůstkové odsazení pro potomky daného elementu (například tabulátor) a \textit{encoding} je kódování. Pouze \textit{file} je povinný parametr. 
+XML dokument uložíme do souboru zavoláním metody
+writexml(\textit{file}, \textit{indent}, \textit{addindent}, \textit{encoding})
+dané instance třídy Document. \textit{File} je soubor připravený pro
+zápis, \textit{indent} udává odsazení na začátku nového elementu
+(například začátek nového řádku), \textit{addindent} udává přírůstkové
+odsazení pro potomky daného elementu (například tabulátor)
+a \textit{encoding} je kódování. Pouze \textit{file} je povinný
+parametr.
 
-Příklad z [\autoref{xml:example}] bychom tedy mohli vytvořit kódem [\autoref{xml:xml}] a zapsat do souboru [\autoref{xml:save}]. {\color{red}upravit}\\
+Příklad z [\autoref{xml:example}] bychom tedy mohli vytvořit kódem
+[\autoref{xml:xml}] a zapsat do souboru
+[\autoref{xml:save}]. {\color{red}upravit}\\
 
 \newpage
 \begin{lstlisting}[label=xml:xml,caption={ukázka tvorby XML dokumentu z [\autoref{xml:example}]}, morekeywords={Document, createElement, setAttribute, createTextNode, addChild}]
@@ -106,4 +159,3 @@ Pro otevření souboru použijeme metodu $xml.minidom.parse$(\textit{path}), kde
 %	\caption{atributy elementu Graph}
 %	\label{tab:graph}
 %\end{table}
-

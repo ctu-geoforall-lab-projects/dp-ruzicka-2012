@@ -1,11 +1,41 @@
 \newpage
 \section{Spuštění workflow}
 \nocite{demel:book}
-Workflow se spouští tlačítkem $Execute$. Jakmile se uživatel rozhodne spustit celý proces (workflow), v grafu se vytvoří podgrafy. Ty jsou v podstatě souvislými komponentami grafu. Tvoří se rekurzivně tak, že se vytvoří podgraf třídy \textbf{SubGraph} a z prvotního seznamu všech modulů v grafu se vyjme jeden a vloží se do něj. Poté se hledají další moduly, které patří do stejné komponenty, do stejného podgrafu. Z původního seznamu všech modulů v grafu se vyjmou všechny moduly spojené s prvním modulem a uloží se do podgrafu, poté se z původního seznamu vyjmou moduly, které jsou spojené s předchozími moduly a tak dále dokud existují spojení. Zároveň se ukládají do podgrafu i spojení (instance třídy Connection). Pakliže již neexistuje další propojený modul a v původním seznamu ještě zůstali nějaké moduly, vytvoří se nový podgraf a postupuje se stejným způsobem jako u předchozího podgrafu. Jeli původní seznam modulů prázdný, znamená to, že všechny moduly z grafu jsou rozděleny do podgrafů.
+Workflow se spouští tlačítkem $Execute$. Jakmile se uživatel rozhodne
+spustit celý proces (workflow), v grafu se vytvoří podgrafy. Ty jsou v
+podstatě souvislými komponentami grafu. Tvoří se rekurzivně tak, že se
+vytvoří podgraf třídy \textbf{SubGraph} a z prvotního seznamu všech
+modulů v grafu se vyjme jeden a vloží se do něj. Poté se hledají další
+moduly, které patří do stejné komponenty, do stejného podgrafu. Z
+původního seznamu všech modulů v grafu se vyjmou všechny moduly
+spojené s prvním modulem a uloží se do podgrafu, poté se z původního
+seznamu vyjmou moduly, které jsou spojené s předchozími moduly a tak
+dále dokud existují spojení. Zároveň se ukládají do podgrafu i spojení
+(instance třídy Connection). Pakliže již neexistuje další propojený
+modul a v původním seznamu ještě zůstali nějaké moduly, vytvoří se
+nový podgraf a postupuje se stejným způsobem jako u předchozího
+podgrafu. Jeli původní seznam modulů prázdný, znamená to, že všechny
+moduly z grafu jsou rozděleny do podgrafů.
 
-Jakmile máme vytvořeny podgrafy, zjistíme, zdali je pro nás graf, resp. všechny jeho podgrafy, validní. To znamená, že se prochází každý podgraf a u každého modulu se kontroluje, zdali jsou u jeho modulů nastaveny všechny povinné vstupní parametry, případně jestli u nich existuje spojení. Pakliže se narazí na modul, u kterého není nějaký povinný vstupní parametr nastaven, uloží se do seznamu nevalidních modulů. Projdou-li se všechny moduly v podgrafu a alespoň jeden není v pořádku, není validní, vypíše se hlášení na lištu ve spodní části Workflow Builderu s informací, že některé moduly nejsou nastaveny a nemůže se pokračovat ve spouštění workflow. Zároveň se také označí moduly, o které se jedná.
+Jakmile máme vytvořeny podgrafy, zjistíme, zdali je pro nás graf,
+resp. všechny jeho podgrafy, validní. To znamená, že se prochází každý
+podgraf a u každého modulu se kontroluje, zdali jsou u jeho modulů
+nastaveny všechny povinné vstupní parametry, případně jestli u nich
+existuje spojení. Pakliže se narazí na modul, u kterého není nějaký
+povinný vstupní parametr nastaven, uloží se do seznamu nevalidních
+modulů. Projdou-li se všechny moduly v podgrafu a alespoň jeden není v
+pořádku, není validní, vypíše se hlášení na lištu ve spodní části
+Workflow Builderu s informací, že některé moduly nejsou nastaveny a
+nemůže se pokračovat ve spouštění workflow. Zároveň se také označí
+moduly, o které se jedná.
 
-Jsou-li všechny povinné vstupní parametry u všech modulů nastaveny nebo spojeny s jiným, zkontroluje se každý podgraf, zdali neobsahuje cyklus. To se provádí pomocí prohledávání grafu do hloubky [viz \lstlistingname \ref{findLoop}]. Neprojde-li kontrola, vypíše se hláška, že graf obsahuje cyklus. Projde-li kontrola a graf neobsahuje cykly, začnou se spouštět postupně všechny podgrafy. Tím zjistíme, že jsou validní a neměli by se objevit žádné známé problémy. 
+Jsou-li všechny povinné vstupní parametry u všech modulů nastaveny
+nebo spojeny s jiným, zkontroluje se každý podgraf, zdali neobsahuje
+cyklus. To se provádí pomocí prohledávání grafu do hloubky
+[viz \lstlistingname \ref{findLoop}]. Neprojde-li kontrola, vypíše se
+hláška, že graf obsahuje cyklus. Projde-li kontrola a graf neobsahuje
+cykly, začnou se spouštět postupně všechny podgrafy. Tím zjistíme, že
+jsou validní a neměli by se objevit žádné známé problémy.
 
 
 \newpage
@@ -39,6 +69,20 @@ Jsou-li všechny povinné vstupní parametry u všech modulů nastaveny nebo spo
         return False
 \end{lstlisting}
 
-Samotné spouštění podgrafu začne tak, že se vezme libovolný modul z podgrafu a zkontroluje se, zdali jsou nastaveny všechny vstupy. Pakliže jsou všechny nastaveny, vytvoří se instance PF Modulu, nastaví se parametry a spustí se. Jsou-li výstupní parametry spojeny s jinými moduly, nastaví se hodnota parametru na druhém konci spojení právě získanou hodnotou. Pakliže nejsou některé vstupní parametry nastaveny, sleduje se jejich spojení a pokusí se spustit předchozí modul. Pakliže i u něho jsou nějaké parametry nenastaveny, opět se sleduje jejich spojení. Vše se opakuje do té doby, dokud se nespustí nějaký modul a ten po úspěšném provedení nastaví vstupní hodnoty v grafu následujících modulů na základě svých výstupních hodnot. Postupně se nakonec spustí všechny moduly a výstupní data se uloží. Tento proces se také řeší rekurzí.
+Samotné spouštění podgrafu začne tak, že se vezme libovolný modul z
+podgrafu a zkontroluje se, zdali jsou nastaveny všechny
+vstupy. Pakliže jsou všechny nastaveny, vytvoří se instance PF Modulu,
+nastaví se parametry a spustí se. Jsou-li výstupní parametry spojeny s
+jinými moduly, nastaví se hodnota parametru na druhém konci spojení
+právě získanou hodnotou. Pakliže nejsou některé vstupní parametry
+nastaveny, sleduje se jejich spojení a pokusí se spustit předchozí
+modul. Pakliže i u něho jsou nějaké parametry nenastaveny, opět se
+sleduje jejich spojení. Vše se opakuje do té doby, dokud se nespustí
+nějaký modul a ten po úspěšném provedení nastaví vstupní hodnoty v
+grafu následujících modulů na základě svých výstupních
+hodnot. Postupně se nakonec spustí všechny moduly a výstupní data se
+uloží. Tento proces se také řeší rekurzí.
 
-Pozn. kontrolují se pouze vstupní parametry, protože SAGA Plugin momentálně ignoruje, zdali nastavíme výstupní parametr či ne - vytvoří si vždy nový.
+Pozn. kontrolují se pouze vstupní parametry, protože SAGA Plugin
+momentálně ignoruje, zdali nastavíme výstupní parametr či ne - vytvoří
+si vždy nový.

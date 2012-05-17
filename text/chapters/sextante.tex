@@ -1,18 +1,44 @@
 \newpage
 \chapter{SEXTANTE pro QGIS}
-Sextante\footnote{http://www.sextantegis.com/} je svobodný GIS nástroj psaný v jazyce Java mezi jehož základní prvky patří \textbf{Toolbox}, \textbf{Graphical Modeler}, \textbf{batch processing} a \textbf{správa historie}. V \textbf{Toolbox} nalezneme všechny dostupné moduly rozdělené podle jejich zdroje. \textbf{Graphical Modeler} umožňuje vytvářet nové moduly spojováním již existujících modulů. Pomocí \textbf{batch processing}u můžeme jednoduše spustit jeden modul několikrát s různými vstupními hodnotami. \textbf{Historie} v sobě uchovává všechny procesy, které byly provedeny. To nám umožňuje provést jakoukoliv dříve provedenou úlohu znovu. Do historie se dále ukládají informace o chybových a varovných hlášeních. Součástí je také řada geoalgoritmů. Jeho implementace existují ve svobodných GIS programech psaných v Javě jako gvSIG či OpenJUMP, a také v komerčním ArcGIS. Díky Victoru Olaya nyní také existuje verze pro Quantum GIS, přepsaná do Pythonu.
+Sextante\footnote{http://www.sextantegis.com/} je svobodný GIS nástroj
+psaný v jazyce Java mezi jehož základní prvky
+patří \textbf{Toolbox}, \textbf{Graphical Modeler}, \textbf{batch
+processing} a \textbf{správa historie}. V \textbf{Toolbox} nalezneme
+všechny dostupné moduly rozdělené podle jejich
+zdroje. \textbf{Graphical Modeler} umožňuje vytvářet nové moduly
+spojováním již existujících modulů. Pomocí \textbf{batch processing}u
+můžeme jednoduše spustit jeden modul několikrát s různými vstupními
+hodnotami. \textbf{Historie} v sobě uchovává všechny procesy, které
+byly provedeny. To nám umožňuje provést jakoukoliv dříve provedenou
+úlohu znovu. Do historie se dále ukládají informace o chybových a
+varovných hlášeních. Součástí je také řada geoalgoritmů. Jeho
+implementace existují ve svobodných GIS programech psaných v Javě jako
+gvSIG či OpenJUMP, a také v komerčním ArcGIS. Díky Victoru Olaya nyní
+také existuje verze pro Quantum GIS, přepsaná do Pythonu.
 
-SEXTANTE podporuje navíc parametry, jejichž implementace v QGIS Processing Frameworku chybí. Jsou to prvky jako tabulka či seznam vrstev. U SEXTANTE existuje více zdrojů poskytujících moduly - R, ftools, mmqgis, Gdal a také SAGA moduly pracují lépe než u QGIS Processing Frameworku.
+SEXTANTE podporuje navíc parametry, jejichž implementace v QGIS
+Processing Frameworku chybí. Jsou to prvky jako tabulka či seznam
+vrstev. U SEXTANTE existuje více zdrojů poskytujících moduly - R,
+ftools, mmqgis, Gdal a také SAGA moduly pracují lépe než u QGIS
+Processing Frameworku.
 
 \section{Srovnání s QGIS Processing Framework}
-\textbf{Processing Manager} vyhledává nejen podle názvu, ale také podle tagů. To bych také uvítal i u \textbf{SEXTANTE}. Chceme-li například vypočítat akumulaci vodního toku, ale nejsme si jisti názvem modulu, u QGIS Procesing Frameworku se stačí podívat do kategorie \textit{hydrology} nebo napsat do vyhledávací řádky \textit{hydrology} a \textbf{Processing Manager} zobrazí moduly obsahující řetězec \textit{hydrology} v názvu nebo v tagu. \textbf{SEXTANTE} nám zobrazí pouze moduly, jejichž názvy obsahují řetězec \textit{hydrology}. Celkově řazení podle různých kategorií je dle mého názoru přívětivější než řazení podle zdroje (GRASS, SAGA, GDAL...). Na druhou stranu Toolbox v SEXTANTE ukládá naposledy použité moduly, což QGIS Processing Framework nedělá. 
 
-SEXTANTE podporuje daleko více modulů. Například zpřístupňuje funkce z GRASS, SAGA, Orfeo Toolbox, GDAL či fTools. Ne všechny ale v době psaní této diplomové práce fungovali správně. 
+\textbf{Processing Manager} vyhledává nejen podle názvu, ale také podle tagů. To bych také uvítal i u \textbf{SEXTANTE}. Chceme-li například vypočítat akumulaci vodního toku, ale nejsme si jisti názvem modulu, u QGIS Procesing Frameworku se stačí podívat do kategorie \textit{hydrology} nebo napsat do vyhledávací řádky \textit{hydrology} a \textbf{Processing Manager} zobrazí moduly obsahující řetězec \textit{hydrology} v názvu nebo v tagu. \textbf{SEXTANTE} nám zobrazí pouze moduly, jejichž názvy obsahují řetězec \textit{hydrology}. Celkově řazení podle různých kategorií je dle mého názoru přívětivější než řazení podle zdroje (GRASS, SAGA, GDAL...). Na druhou stranu Toolbox v SEXTANTE ukládá naposledy použité moduly, což QGIS Processing Framework nedělá.
 
-SEXTANTE pro QGIS má propracovanější práci přes příkazovou řádku a celkově práce s výstupními daty je jednodušší.
+SEXTANTE podporuje daleko více modulů. Například zpřístupňuje funkce z
+GRASS, SAGA, Orfeo Toolbox, GDAL či fTools. Ne všechny ale v době
+psaní této diplomové práce fungovali správně.
+
+SEXTANTE pro QGIS má propracovanější práci přes příkazovou řádku a
+celkově práce s výstupními daty je jednodušší.
 
 \section{Srovnání s Workflow Builder}
 
 \textbf{Graphical Modeler} v SEXTANTE nabízí velmi zajímavou funkcionalitu a tou je generování kódu v Pythonu, který se generuje na základě vytvořeného workflow.
 
-Nevýhodou je, že přidáme-li jednou algoritmus do scény, nemůžeme měnit jeho parametry. Musíme modul smazat a znovu jej přidat. To samé platí i u samotného spojení dvou modulů. Oproti Graphical Modeleru lze v Workflow Builderu na první pohled vidět, kterými parametry jsou dané moduly spojeny. 
+Nevýhodou je, že přidáme-li jednou algoritmus do scény, nemůžeme měnit
+jeho parametry. Musíme modul smazat a znovu jej přidat. To samé platí
+i u samotného spojení dvou modulů. Oproti Graphical Modeleru lze v
+Workflow Builderu na první pohled vidět, kterými parametry jsou dané
+moduly spojeny.
