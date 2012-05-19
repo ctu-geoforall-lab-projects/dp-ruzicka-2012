@@ -36,8 +36,9 @@ vysoké úrovni \cite{qt:www}.
   	\label{qtdesigner}
 \end{figure}
 
-Soubor vytvořený v Qt Designer (s příponou \textbf{.ui}) lze jednoduše přeložit programem \textbf{pyuic4} do kódu pro Python srozumitelného. \\
+Soubor vytvořený v Qt Designer (s příponou \textbf{.ui}) lze jednoduše přeložit programem \textbf{pyuic4} do kódu pro Python srozumitelného [\autoref{pyuic4}]. \\
 
+\newpage
 \begin{lstlisting}[label=pyuic4,caption={pyuic4 - přeložení .ui souboru do pythoního kódu},morekeywords={pyuic4}]
 		pyuic4 soubor_vytvoreny_v_Qt_Designer.ui -o py_soubor.py 
 \end{lstlisting}
@@ -82,9 +83,9 @@ signálu.  \\
 
 Předpokládejme, že $tonda$ je objekt třídy \textbf{Tonda}, která je
 potomkem třídy \textbf{QObject}. Když jde $tonda$ domů, vyšle signál
-$SIGNAL("jdu")$ s parametrem $"domu"$: \\
+$SIGNAL("jdu")$ s parametrem $"domu"$. \\
 
-
+\newpage
 \begin{lstlisting}[label=qtemit,caption={vyslání slotu pod názvem $"jdu"$ s atributem $"domu"$}]
 		tonda = Tonda()
 		tonda.emit(SIGNAL("jdu"),"domu")
@@ -283,6 +284,7 @@ $data(role)$. Model s QStandardItemModel s QStandardItem se hodí pro
 hierarchicky uspořádaná data. Ukázka použití QStandardItem viz
 [\autoref{qstandarditem}]. \\
 
+\newpage
 \begin{lstlisting}[label=qstandarditem,caption={QStandardItem - vytvoření a získání dat}, morekeywords={PyQt4, QtCore, QtGui, QStandardItem, Qt, Qt.UserRole, Qt.DisplayRole}]
 	from PyQt4.QtCore import Qt
 	from PyQt4.QtGui import QStandardItem
@@ -365,7 +367,7 @@ class Delegate(QItemDelegate):
 \end{lstlisting}
 
         
-\noindent V tomto příkladě \ref{qdelegate:paint} předpokládáme, že data (v podobě indexů) obsahují informaci o pohlaví uloženou pod rolí $Qt.UserRole + 3$.
+\noindent V tomto příkladě [\autoref{qdelegate:paint}] předpokládáme, že data (v podobě indexů) obsahují informaci o pohlaví uloženou pod rolí $Qt.UserRole + 3$.
 
 Editor (widget pro editaci dat) nastavíme reimplementací metody
 $createEditor$, která vrací QWidget. Aby se po editaci změnila data v
@@ -537,8 +539,8 @@ Na začátku práce na Workflow Builderu se nabízela možnost využít
 některých svobodných projektů pro modelování workflow
 diagramů. Vzhledem k tomu, že QGIS využívá knihovnu Qt a QGIS
 Processing framework samotný je psaný v Pythonu, naskýtali se jako
-možnosti inspirace projekty Orange či \footnotemark{\index{VisTrails}
-VisTrails}\footnotetext{\url{http://www.vistrails.org/index.php/Main\_Page}}.
+možnosti inspirace projekty Orange či \index{VisTrails}
+VisTrails\footnote{\url{http://www.vistrails.org/index.php/Main\_Page}}.
 
 Nejvíce mě oslovilo grafické zpracování VisTrails [viz
 Obr. \ref{vt}]. Uživatel na první pohled vidí, jaký parametr je s
