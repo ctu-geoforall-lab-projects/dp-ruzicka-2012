@@ -50,10 +50,10 @@ class Plugin:
         dir.setNameFilters(QStringList( ["*.xml"] ) )
         for f in dir.entryInfoList():
             # take file, make Module
-#            try:
-            tmpMods.append( Module(f.absoluteFilePath()) )
-#            except:
-#                print "I can't read this file: {0}".format(f.absoluteFilePath())
+            try:
+                tmpMods.append( Module(f.absoluteFilePath()) )
+            except:
+                print "I can't read this file: {0}".format(f.absoluteFilePath())
         currentModules = map(lambda mod: mod.name(),list(processing.framework.modules()))
         for mod in tmpMods:
             if mod.name() not in currentModules:
